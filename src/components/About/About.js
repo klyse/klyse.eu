@@ -33,7 +33,7 @@ function About() {
         <div className="SectionTitle">About Me</div>
         <div className="BigCard">
           <Image
-            src="/avatar.svg"
+            src="/avatar.png"
             alt="man-svgrepo"
           />
           <div className="AboutBio">
