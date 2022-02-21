@@ -37,13 +37,12 @@ function About() {
             alt="man-svgrepo"
           />
           <div className="AboutBio">
-            Hello! My name is <strong>Klaus</strong> I've been working as a
-            professional developer for the past {new Date().getFullYear() - 2014}  years.
+            My name is <strong>Klaus</strong> and I have been a professional
+            developer for {new Date().getFullYear() - 2014}  years.
             I started as a C/C++ developer for highly customizable real-time applications.
-            Moved on to backend development a couple of years ago. I like to design and deploy scalable API's.
-            I also have multiple years of experience in the DevOps sector where I run various apps on
-            different cloud providers using all sorts of tools and pipelines etc.
-
+            A few years ago I moved to backend development. I like designing and implementing scalable APIs.
+            I also have several years of experience in the DevOps sector, running various
+            applications on different cloud providers with all sorts of tools and pipelines.
           </div>
           <div className="AboutBio tagline2">
             I know my way around:
@@ -57,7 +56,7 @@ function About() {
             ))}
           </Technologies>
           <div className="AboutBio tagline2">
-            I'd love to work with in future:
+            In future I'd love to work with:
           </div>
           <Technologies>
             {futureList.map((stack, index) => (

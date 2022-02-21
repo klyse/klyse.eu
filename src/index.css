@@ -23,12 +23,6 @@ main {
   width: 100%;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  background-color: transparent;
-}
-
 ul,
 ol {
   list-style: none;
@@ -77,6 +71,7 @@ video {
 .PrimaryBtn {
   background: rgb(57, 134, 250);
   color: #f6f6f6;
+  text-decoration: none;
 }
 
 .PrimaryBtn:hover {
