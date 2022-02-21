@@ -40,8 +40,8 @@ function About() {
             Hello! My name is <strong>Klaus</strong> I've been working as a
             professional developer for the past {new Date().getFullYear() - 2014}  years.
             I started as a C/C++ developer for highly customizable real-time applications.
-            Moved on to Backend development a couple of years ago. I like to design and deploy scalable API's.
-            I have multiple years of experience in the DevOps sector where I run various apps on
+            Moved on to backend development a couple of years ago. I like to design and deploy scalable API's.
+            I also have multiple years of experience in the DevOps sector where I run various apps on
             different cloud providers using all sorts of tools and pipelines etc.
 
           </div>
