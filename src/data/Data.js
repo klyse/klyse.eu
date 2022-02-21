@@ -26,8 +26,8 @@ export const stackList = [
     name: ".net core",
   },
   {
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
-    name: "C#",
+    img: "https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg",
+    name: "Terraform",
   },
   {
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
