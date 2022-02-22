@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub } from "react-icons/fa";
 
 import styled from "styled-components";
+import {ReactComponent as DevToIcon} from '../../dev.to-icon.svg';
 
 export const SocialDiv = styled.div`
   margin-top: 2rem;
@@ -37,20 +38,20 @@ function SocialIcon() {
       <ul>
         <li className="item">
           <a
-            href="https://dev.to/klyse/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="/dev.to-icon.svg" className='iconChat' alt="Icon chat"/>
-          </a>
-        </li>
-        <li className="item">
-          <a
             href="https://github.com/klyse/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub />
+          </a>
+        </li>
+        <li className="item">
+          <a
+            href="https://dev.to/klyse/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <DevToIcon width="40px" height="40px"/>
           </a>
         </li>
       </ul>

@@ -1,6 +1,7 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import styled from "styled-components";
+import {ReactComponent as DevToIcon} from '../../dev.to-icon.svg';
 
 const Social = styled.div`
   display: block;
@@ -49,7 +50,7 @@ function FixSocialIcon() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/dev.to-icon.svg" className='iconChat' alt="Icon chat"/>
+            <DevToIcon  />
           </a>
         </li>
       </ul>
