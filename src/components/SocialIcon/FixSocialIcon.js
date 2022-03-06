@@ -1,7 +1,7 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import styled from "styled-components";
-import {ReactComponent as DevToIcon} from '../../dev.to-icon.svg';
+import {ReactComponent as DevToIcon} from '../../Assets/dev.to-icon.svg';
 
 const Social = styled.div`
   display: block;

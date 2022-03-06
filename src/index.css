@@ -17,7 +17,7 @@ body {
 
 main {
   background: #151418;
-  background-image: url(./bg.svg);
+  background-image: url(./Assets/bg.svg);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
