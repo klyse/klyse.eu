@@ -9,8 +9,6 @@ function Home() {
     <>
       <Hero />
       <About />
-      <Contact />
-      <Footer />
       <FixSocialIcon />
     </>
   );
