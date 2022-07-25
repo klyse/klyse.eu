@@ -23,7 +23,7 @@ export const stackList = [
   },
   {
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
-    name: ".net core",
+    name: ".net",
   },
   {
     img: "https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg",
