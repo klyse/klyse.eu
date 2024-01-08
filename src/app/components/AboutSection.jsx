@@ -5,43 +5,50 @@ import TabButton from "./TabButton";
 
 const TAB_DATA = [
   {
-    title: "Skills",
-    id: "skills",
+    title: "Backend",
+    id: "backend",
     content: (
       <ul className="list-disc pl-2">
+        <li>ASP.NET Core</li>
         <li>Node.js</li>
-        <li>Express</li>
-        <li>PostgreSQL</li>
-        <li>Sequelize</li>
-        <li>JavaScript</li>
+        <li>MongoDb</li>
+        <li>Postgres</li>
         <li>React</li>
+        <li>Docker</li>
       </ul>
     ),
   },
   {
-    title: "Education",
-    id: "education",
+    title: "Frontend",
+    id: "frontend",
     content: (
       <ul className="list-disc pl-2">
-        <li>Fullstack Academy of Code</li>
-        <li>University of California, Santa Cruz</li>
+        <li>React</li>
+        <li>SvelteKit</li>
+        <li>Typescript</li>
+        <li>Mantine.dev</li>
+        <li>Tailwind CSS</li>
       </ul>
     ),
   },
   {
-    title: "Certifications",
-    id: "certifications",
+    title: "DevOps",
+    id: "devops",
     content: (
       <ul className="list-disc pl-2">
-        <li>AWS Cloud Practitioner</li>
-        <li>Google Professional Cloud Developer</li>
+        <li>AWS</li>
+        <li>Azure</li>
+        <li>Google Cloud</li>
+        <li>Github Actions</li>
+        <li>Docker</li>
+        <li>Terraform</li>
       </ul>
     ),
   },
 ];
 
 const AboutSection = () => {
-  const [tab, setTab] = useState("skills");
+  const [tab, setTab] = useState("backend");
   const [isPending, startTransition] = useTransition();
 
   const handleTabChange = (id) => {
@@ -57,35 +64,26 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I am a full stack web developer with a passion for creating
-            interactive and responsive web applications. I have experience
-            working with JavaScript, React, Redux, Node.js, Express, PostgreSQL,
-            Sequelize, HTML, CSS, and Git. I am a quick learner and I am always
-            looking to expand my knowledge and skill set. I am a team player and
-            I am excited to work with others to create amazing applications.
+            I'm Klaus, a developer with 10 years of experience. Initially
+            focused on C/C++ for real-time applications, I've transitioned to
+            backend development, where I enjoy crafting scalable APIs. My
+            journey also includes several years in DevOps, working with various
+            cloud platforms and tools. My technical toolkit includes JavaScript,
+            React, Node.js, and more. I value teamwork and continuous learning,
+            and I'm enthusiastic about collaborating on innovative web
+            applications.
           </p>
           <div className="flex flex-row justify-start mt-8">
-            <TabButton
-              selectTab={() => handleTabChange("skills")}
-              active={tab === "skills"}
-            >
-              {" "}
-              Skills{" "}
-            </TabButton>
-            <TabButton
-              selectTab={() => handleTabChange("education")}
-              active={tab === "education"}
-            >
-              {" "}
-              Education{" "}
-            </TabButton>
-            <TabButton
-              selectTab={() => handleTabChange("certifications")}
-              active={tab === "certifications"}
-            >
-              {" "}
-              Certifications{" "}
-            </TabButton>
+            {TAB_DATA.map((t) => (
+              <TabButton
+                key={t.id}
+                selectTab={() => handleTabChange(t.id)}
+                active={tab === t.id}
+              >
+                {" "}
+                {t.title}{" "}
+              </TabButton>
+            ))}
           </div>
           <div className="mt-8">
             {TAB_DATA.find((t) => t.id === tab).content}

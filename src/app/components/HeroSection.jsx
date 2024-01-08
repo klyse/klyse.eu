@@ -22,13 +22,13 @@ const HeroSection = () => {
             <br></br>
             <TypeAnimation
               sequence={[
-                "Judy",
+                "Klaus",
                 1000,
-                "Web Developer",
+                "Backend Developer",
                 1000,
-                "Mobile Developer",
+                "Frontend Developer",
                 1000,
-                "UI/UX Designer",
+                "Devops Engineer",
                 1000,
               ]}
               wrapper="span"
@@ -37,15 +37,15 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            voluptuous.
+            Orchestrating Code from Frontend Elegance to Backend Power and
+            DevOps Harmony
           </p>
           <div>
             <Link
               href="/#contact"
               className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
             >
-              Hire Me
+              Contact Me
             </Link>
             <Link
               href="/"
