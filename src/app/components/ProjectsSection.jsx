@@ -38,6 +38,14 @@ export const projectsData = [
     image: "/images/projects/5.png",
     gitUrl: "https://github.com/klyse/LogitechKeyboardLED",
   },
+  {
+    id: 6,
+    title: "XR Cloud Rendering",
+    description: "Globally scaled cloud rendering for XR applications",
+    image: "/images/projects/5.png",
+    gitUrl: "https://github.com/innoactive",
+    previewUrl: "https://www.innoactive.io/",
+  },
 ];
 
 const ProjectsSection = () => {
