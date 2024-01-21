@@ -2,6 +2,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { WorkYears } from "../glabals";
+import { projectsData } from "./ProjectsSection";
 
 const AnimatedNumbers = dynamic(
   () => {
@@ -18,7 +19,7 @@ const achievementsList = [
   },
   {
     metric: "Projects",
-    value: "5",
+    value: projectsData.length,
   },
   {
     prefix: "~",

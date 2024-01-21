@@ -21,15 +21,18 @@ const EmailSection = () => {
         </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
           {" "}
-          I&apos;m currently looking for new opportunities, my inbox is always
-          open. Whether you have a question or just want to say hi, I&apos;ll
-          try my best to get back to you!
+          I'm always open to interesting conversations and connections. Feel
+          free to reach out if you have any questions, ideas, or even if you
+          just want to say hello. I'll do my best to respond when I can!
         </p>
         <div className="socials flex flex-row gap-2">
-          <Link href="github.com">
+          <Link href="https://github.com/klyse" target="_blank">
             <Image src={GithubIcon} alt="Github Icon" />
           </Link>
-          <Link href="linkedin.com">
+          <Link
+            href="https://www.linkedin.com/in/klauspruenster/"
+            target="_blank"
+          >
             <Image src={LinkedinIcon} alt="Linkedin Icon" />
           </Link>
         </div>
