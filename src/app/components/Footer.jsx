@@ -13,9 +13,9 @@ const Footer = () => {
         />
         <p className="text-slate-800">All rights reserved.</p>
         <p className="text-slate-800">
-          Template by{" "}
-          <a href="https://github.com/judygab/nextjs-portfolio" target="_blanc">
-            judygab
+          Github{" "}
+          <a href="https://github.com/klyse/klyse.eu" target="_blanc">
+            project
           </a>
         </p>
       </div>
