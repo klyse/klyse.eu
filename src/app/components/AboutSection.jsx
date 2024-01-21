@@ -3,6 +3,7 @@ import React, { useTransition, useState } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
 import { WorkYears } from "../glabals";
+import Link from "next/link";
 
 const TAB_DATA = [
   {
@@ -70,14 +71,16 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I'm Klaus, a developer with <WorkYears /> years of experience.
-            Initially focused on C/C++ for real-time applications, I've
-            transitioned to backend development, where I enjoy crafting scalable
-            APIs. My journey also includes several years in DevOps, working with
-            various cloud platforms and tools. My technical toolkit includes
-            JavaScript, React, Node.js, and more. I value teamwork and
-            continuous learning, and I'm enthusiastic about collaborating on
-            innovative web applications.
+            I'm Klaus, a seasoned developer with over <WorkYears />+ years of
+            experience, specializing in backend and DevOps, with a flair for
+            frontend development. Beginning my career with C/C++, I now excel in
+            creating versatile C# backends. At <Link href="https://innoactive.io" target="_blank">Innoactive</Link>, I'm instrumental in
+            transforming XR cloud rendering for enterprises. Creator of
+            Strawanzer and other innovative apps, my expertise spans multiple
+            programming and spoken languages. Passionate about continuous
+            learning and teamwork, I'm dedicated to building cutting-edge,
+            collaborative tech solutions. Let's embark on this exciting tech
+            journey together!
           </p>
           <div className="flex flex-row justify-start mt-8">
             {TAB_DATA.map((t) => (
