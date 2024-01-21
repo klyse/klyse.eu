@@ -7,7 +7,22 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Hi there! I'm Klyse",
-  description: "My own webpage",
+  description: "My webpage",
+  openGraph: {
+    title: "klyse.eu",
+    description: "My webpage",
+    url: "https://klyse.eu",
+    siteName: "klyse.eu",
+    images: [
+      {
+        url: "https://klyse.eu/logo_white.png",
+        width: 738,
+        height: 738,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {
