@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import { WorkYears } from "../glabals";
 
 const AnimatedNumbers = dynamic(
   () => {
@@ -11,22 +12,23 @@ const AnimatedNumbers = dynamic(
 
 const achievementsList = [
   {
-    metric: "Projects",
-    value: "100",
+    metric: "Github Contributions",
+    value: "10000",
     postfix: "+",
   },
   {
-    prefix: "~",
-    metric: "Users",
-    value: "100,000",
+    metric: "Projects",
+    value: "5",
   },
   {
-    metric: "Awards",
+    prefix: "~",
+    metric: "Hackathons",
     value: "7",
   },
   {
     metric: "Years",
-    value: "5",
+    value: WorkYears(),
+    postfix: "+",
   },
 ];
 
