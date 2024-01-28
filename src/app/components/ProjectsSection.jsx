@@ -23,6 +23,7 @@ export const projectsData = [
     title: "Premer",
     description: "Presentation timer for Apple Watch",
     image: "/images/projects/premer.png",
+    gitUrl: "https://github.com/klyse/premer",
     previewUrl: "https://premer.klyse.eu",
   },
   {
