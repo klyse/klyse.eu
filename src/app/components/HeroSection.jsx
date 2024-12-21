@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import { TypeAnimation } from "react-type-animation";
 
 const HeroSection = () => {
   return (
@@ -24,9 +23,7 @@ const HeroSection = () => {
               sequence={[
                 "Klaus",
                 1000,
-                "Backend Dev",
-                1000,
-                "FullStack Dev",
+                "Software Dev",
                 1000,
                 "DevOps Engineer",
                 1000,
