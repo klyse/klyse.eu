@@ -16,7 +16,6 @@ export const projectsData = [
     title: "Magun",
     description: "Share those emotions",
     image: "/images/projects/magun.png",
-    previewUrl: "https://magun.space",
   },
   {
     id: 3,
