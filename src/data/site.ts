@@ -20,10 +20,11 @@ export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   lede: "I started out writing near-realtime C++, where every millisecond counts, and no AI wrote a single line of it.",
   steps: [
     ["Next came backend services, across different databases and different languages."],
+    ["Along the way I took on DevOps and infrastructure: CI/CD pipelines, containers and cloud setups on AWS, Azure and Google Cloud."],
     ["Later I added frontends and started shipping my own apps, front to back, product included."],
     ["At ", { pill: "Durst Group", href: links.durst }, " I now design systems front to back, ", { ghost: "finally with AI helping out." }],
   ],
-  outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
+  outro: "I like efficient teams and solving customers' problems.",
 };
 
 // Not shown on the page; feeds `knowsAbout` in the structured data.
