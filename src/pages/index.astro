@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Stats from "../components/Stats.astro";
+import SectionMarker from "../components/SectionMarker.astro";
+import Tabs from "../components/Tabs.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Button from "../components/Button.astro";
+import Footer from "../components/Footer.astro";
+import { about, skills, projects, links } from "../data/site";
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+    <Stats />
+
+    <section id="about" class="section wrap">
+      <div class="section-head">
+        <SectionMarker number="01" label="About" />
+        <h2 class="t-title">About me</h2>
+      </div>
+      <div class="about">
+        <div class="about-text">
+          {about.map((p) => <p>{p}</p>)}
+        </div>
+        <Tabs tabs={skills} />
+      </div>
+    </section>
+
+    <section id="projects" class="section wrap">
+      <div class="section-head">
+        <SectionMarker number="02" label="Projects" />
+        <h2 class="t-title">Things I built</h2>
+      </div>
+      <ul class="projects">
+        {
+          projects.map((p, i) => (
+            <li>
+              <ProjectCard number={String(i + 1).padStart(2, "0")} {...p} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section id="contact" class="section wrap">
+      <div class="section-head">
+        <SectionMarker number="03" label="Contact" />
+        <h2 class="t-title">Let's talk</h2>
+      </div>
+      <p class="contact-text">
+        I'm always up for a good conversation: questions, ideas, or just hello. The quickest way to reach me is LinkedIn.
+      </p>
+      <div class="contact-actions">
+        <Button href={links.linkedin} meta="↗" external>LinkedIn</Button>
+        <Button href={links.github} variant="quiet" meta="↗" external>GitHub</Button>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: var(--step-12); align-items: start; }
+  .about-text p { margin: 0 0 var(--step-4); max-width: 62ch; }
+  .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--step-8); margin: 0; padding: 0 6px 6px 0; list-style: none; }
+  .contact-text { margin: 0; max-width: 52ch; color: var(--ink-muted); }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
+  @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
+</style>

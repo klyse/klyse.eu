@@ -1,0 +1,33 @@
+---
+// The k. mark drawn inline, so it follows the theme tokens and the k can lift off its slab.
+interface Props {
+  height?: number;
+}
+
+const { height = 40 } = Astro.props;
+const k = "M23 13V83M23 62L66 21M42 45L68 83";
+---
+
+<svg class="mark" viewBox="0 0 112 100" height={height} width={height * 1.12} role="img" aria-label="klaus.">
+  <g class="mark-slab" transform="translate(5 5)">
+    <path d={k} />
+    <circle cx="92" cy="83" r="10" />
+  </g>
+  <g class="mark-face">
+    <path d={k} />
+    <circle cx="92" cy="83" r="10" />
+  </g>
+</svg>
+
+<style>
+  .mark { display: block; overflow: visible; }
+  path { fill: none; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
+  .mark-slab path { stroke: var(--slab); }
+  .mark-slab circle { fill: var(--slab); }
+  .mark-face path { stroke: var(--glow); }
+  .mark-face circle { fill: var(--glow); }
+  .mark-face { transition: transform var(--motion-step); }
+  /* SVG user units: the slab sits 5 behind; hover doubles the gap, press closes it */
+  @media (hover: hover) { :global(a:hover) > .mark .mark-face { transform: translate(-6px, -6px); } }
+  :global(a:active) > .mark .mark-face { transform: translate(5px, 5px); }
+</style>

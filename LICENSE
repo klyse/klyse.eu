@@ -1,6 +1,11 @@
-MIT License
+This repository contains two kinds of material under two different terms.
 
-Copyright (c) 2023 Judy Gab, Klyse
+1. SOURCE CODE: MIT License
+
+Everything in this repository is licensed under the MIT License below,
+EXCEPT the material listed in section 2.
+
+Copyright (c) 2026 Klaus Prünster
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +24,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+2. PHOTOGRAPHS, LOGOS AND BRAND ASSETS: All rights reserved
+
+Copyright (c) 2026 Klaus Prünster. All rights reserved.
+
+The following are NOT licensed under the MIT License and may not be copied,
+reused, modified or redistributed without prior written permission:
+
+  - every file in public/images/ (photographs of Klaus Prünster)
+  - every file in public/brand/ (the "klaus." logo, mark, wordmark and icon)
+  - public/favicon.svg
+  - any other photograph or likeness of Klaus Prünster in this repository
+
+If you fork or reuse this code, remove or replace these files with your own.
+
+Fonts are loaded from Google Fonts at runtime and are not distributed with this
+repository; they remain under their own licenses (SIL Open Font License 1.1).

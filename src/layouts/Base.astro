@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "klaus. — Klaus Prünster, software architect",
+  description = "Klaus Prünster, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a stored theme choice before first paint, so there is no flash of the other theme.
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "day" || t === "night") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#efe9df" media="(prefers-color-scheme: light)" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL("/images/portrait-wide.jpg", Astro.site)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Hanken+Grotesk:wght@400;600&family=Martian+Mono:wght@400;500&display=swap"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
