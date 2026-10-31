@@ -4,11 +4,10 @@ import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import Stats from "../components/Stats.astro";
 import SectionMarker from "../components/SectionMarker.astro";
-import Tabs from "../components/Tabs.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Button from "../components/Button.astro";
 import Footer from "../components/Footer.astro";
-import { about, skills, projects, links } from "../data/site";
+import { about, projects, links } from "../data/site";
 ---
 
 <Base>
@@ -51,7 +50,6 @@ import { about, skills, projects, links } from "../data/site";
           </ol>
           <p class="about-outro">{about.outro}</p>
         </div>
-        <Tabs tabs={skills} />
       </div>
     </section>
 
@@ -105,8 +103,7 @@ import { about, skills, projects, links } from "../data/site";
 </script>
 
 <style>
-  .about { display: grid; grid-template-columns: 7fr 5fr; gap: var(--step-18); align-items: start; }
-  .about > :global(.tabs) { position: sticky; top: 112px; }
+  .about { max-width: 720px; }
   .about-lede { margin: 0 0 var(--step-8); max-width: 26ch; font-family: var(--font-display); font-size: 32px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
   .about-outro { margin: var(--step-8) 0 0; max-width: 58ch; color: var(--ink-muted); }
 
@@ -151,7 +148,6 @@ import { about, skills, projects, links } from "../data/site";
   .contact-text { margin: 0; max-width: 52ch; color: var(--ink-muted); }
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: var(--step-12); } .about > :global(.tabs) { position: static; } }
   @media (max-width: 620px) { .about-lede { font-size: 26px; } .steps .step-now { font-size: 17px; padding-left: calc(var(--step-4) + var(--step-8)); padding-right: var(--step-4); } .steps .step-now::before { left: var(--step-4); } }
   @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
 </style>

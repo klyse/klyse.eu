@@ -25,12 +25,6 @@ export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
 };
 
-export const skills = [
-  { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
-  { id: "frontend", title: "Frontend", items: ["Astro", "React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
-  { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
-];
-
 export type ArtKind = "xr" | "events" | "watch" | "emotions" | "price" | "keyboard";
 
 export type Project = {
