@@ -6,12 +6,12 @@ import { hero, links } from "../data/site";
 
 <section class="hero wrap">
   <div class="hero-text">
-    <p class="t-meta hero-kicker">Klaus Prünster · Backend &amp; DevOps</p>
+    <p class="t-meta hero-kicker">Klaus Prünster · Software Architect</p>
     <h1 class="t-hero">klaus<span class="dot">.</span></h1>
     <p class="t-lede hero-lede">{hero.lede}</p>
     <div class="hero-actions">
       <Button href="#contact">Get in touch</Button>
-      <Button href={links.innoactive} variant="quiet" meta="↗" external>Work: Innoactive</Button>
+      <Button href={links.durst} variant="quiet" meta="↗" external>Work: Durst Group</Button>
     </div>
   </div>
   <div class="hero-photo">
@@ -29,7 +29,7 @@ import { hero, links } from "../data/site";
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; gap: var(--step-8); padding-top: var(--step-8); }
     .hero-photo { justify-self: start; grid-row: 1; }
-    .hero-photo :global(.portrait) { width: 168px; box-shadow: var(--shadow-slab); }
+    .hero-photo :global(.portrait) { width: 168px; --lift: 3px; --slab-rest: 6px; }
     .hero-kicker { margin-bottom: var(--step-3); }
     .hero-lede { margin-top: var(--step-6); }
     .hero-actions { margin-top: var(--step-8); gap: var(--step-4); }

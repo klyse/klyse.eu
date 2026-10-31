@@ -14,7 +14,13 @@ const { size = 360 } = Astro.props;
   .portrait {
     display: block; width: min(var(--size), 72vw); aspect-ratio: 1;
     border-radius: var(--radius-pill); border: 1px solid var(--slab);
-    box-shadow: var(--shadow-slab-lg); overflow: hidden; background: var(--ground-raised);
+    /* rest = shadow-slab-lg; sizes are variables so a smaller placement can scale the whole effect */
+    --lift: 6px; --slab-rest: 12px;
+    box-shadow: var(--slab-rest) var(--slab-rest) 0 0 var(--slab); overflow: hidden; background: var(--ground-raised);
+    transition: transform var(--motion-step), box-shadow var(--motion-step);
   }
+  /* Same physics as the buttons: lift onto a deeper slab on hover, press into it on click */
+  .portrait:hover { transform: translate(calc(var(--lift) * -1), calc(var(--lift) * -1)); box-shadow: calc(var(--slab-rest) + var(--lift)) calc(var(--slab-rest) + var(--lift)) 0 0 var(--slab); }
+  .portrait:active { transform: translate(var(--slab-rest), var(--slab-rest)); box-shadow: none; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 </style>

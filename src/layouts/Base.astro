@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "klaus. — Klaus Prünster, backend & DevOps engineer",
-  description = "Klaus Prünster builds C# backends and the cloud pipelines that ship them.",
+  title = "klaus. — Klaus Prünster, software architect",
+  description = "Klaus Prünster, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
 } = Astro.props;
 ---
 
@@ -17,6 +17,13 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a stored theme choice before first paint, so there is no flash of the other theme.
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "day" || t === "night") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />

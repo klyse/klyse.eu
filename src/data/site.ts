@@ -4,12 +4,12 @@ export const workYears = new Date().getFullYear() - workStart.getFullYear();
 export const links = {
   github: "https://github.com/klyse",
   linkedin: "https://www.linkedin.com/in/klauspruenster/",
-  innoactive: "https://innoactive.io",
+  durst: "https://www.durst-group.com",
   source: "https://github.com/klyse/klyse.eu",
 };
 
 export const hero = {
-  lede: "I build C# backends and the cloud pipelines that ship them. Backend and DevOps first, with a soft spot for a good frontend.",
+  lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
 export const stats = [
@@ -20,14 +20,14 @@ export const stats = [
 ];
 
 export const about = [
-  `I'm Klaus, a developer with ${workYears}+ years of experience, focused on backend and DevOps. I started out in C and C++ and today mostly build C# backends.`,
-  "At Innoactive I work on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
+  `I'm Klaus, a software architect at Durst Group with ${workYears}+ years of experience in backend and DevOps. I started out in C and C++ and today mostly design and build C# backends.`,
+  "Before that, at Innoactive, I worked on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
   "On the side I build my own things, like Strawanzer and Premer. I like learning, I like teams, and I speak more than one language, in code and out of it.",
 ];
 
 export const skills = [
   { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
-  { id: "frontend", title: "Frontend", items: ["React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
+  { id: "frontend", title: "Frontend", items: ["Astro", "React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
   { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
 ];
 
@@ -38,7 +38,7 @@ export type Project = {
   description: string;
   art: ArtKind;
   year?: string;
-  status?: "live" | "archived";
+  status?: "live" | "private" | "archived";
   stack?: string[];
   liveUrl?: string;
   codeUrl?: string;
@@ -58,10 +58,12 @@ export const projects: Project[] = [
     art: "events",
     description: "South Tyrol's events platform.",
     status: "archived",
+    liveUrl: "https://strawanzer.events",
   },
   {
     title: "Premer",
     art: "watch",
+    status: "archived",
     description: "Presentation timer for Apple Watch.",
     codeUrl: "https://github.com/klyse/premer",
   },
@@ -75,7 +77,7 @@ export const projects: Project[] = [
     title: "Price Tracking",
     art: "price",
     description: "Price tracking for supermarkets.",
-    status: "archived",
+    status: "private",
   },
   {
     title: "Logitech Keyboard LED",

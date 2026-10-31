@@ -7,7 +7,8 @@ interface Props extends Project {
 }
 
 const { number, title, description, art, year, status, stack, liveUrl, codeUrl } = Astro.props;
-const meta = [year, status === "archived" ? "Archived" : status === "live" ? "Live" : undefined].filter(Boolean).join(" · ");
+const statusLabel = { live: "Live", private: "Private", archived: "Archived" };
+const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
 ---
 
 <article class:list={["card", status === "archived" && "card-archived"]}>
