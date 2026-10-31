@@ -9,9 +9,31 @@ import ProjectCard from "../components/ProjectCard.astro";
 import Button from "../components/Button.astro";
 import Footer from "../components/Footer.astro";
 import { about, skills, projects, links } from "../data/site";
+
+const site = Astro.site!.href;
+const person = {
+  "@type": "Person",
+  "@id": `${site}#klaus`,
+  name: "Klaus",
+  givenName: "Klaus",
+  alternateName: "klyse",
+  url: site,
+  jobTitle: "Software Architect",
+  worksFor: { "@type": "Organization", name: "Durst Group", url: links.durst },
+  knowsAbout: [...new Set(skills.flatMap((s) => s.items))],
+  sameAs: [links.github, links.linkedin],
+};
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "@id": `${site}#website`, url: site, name: "klaus.", inLanguage: "en", publisher: { "@id": person["@id"] } },
+    { "@type": "ProfilePage", "@id": `${site}#profile`, url: site, isPartOf: { "@id": `${site}#website` }, mainEntity: person },
+  ],
+};
 ---
 
 <Base>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Nav />
   <main>
     <Hero />
