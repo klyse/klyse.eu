@@ -109,16 +109,30 @@ const jsonLd = {
 </Base>
 
 <script>
-  // The "Now" line plays a code-completion: the AI part waits as ghost text, then Tab accepts it.
-  // Without JS (or with reduced motion) the line simply renders accepted.
+  // The "Now" line plays a code-completion on loop: the AI part fades in as ghost text, Tab accepts it,
+  // it holds, then fades out and gets suggested again. Without JS (or with reduced motion) it renders accepted.
   const line = document.querySelector<HTMLElement>("[data-autocomplete]");
   if (line && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    line.classList.add("suggesting");
+    line.classList.add("suggesting", "faded");
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const play = async () => {
+      for (;;) {
+        line.classList.remove("faded");
+        await wait(1800);
+        line.classList.add("pressing");
+        await wait(200);
+        line.classList.remove("pressing", "suggesting");
+        await wait(3200);
+        line.classList.add("faded");
+        await wait(700);
+        line.classList.add("suggesting");
+        await wait(500);
+      }
+    };
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return;
       io.disconnect();
-      setTimeout(() => line.classList.add("pressing"), 1400);
-      setTimeout(() => line.classList.replace("suggesting", "accepted"), 1600);
+      play();
     }, { threshold: 1 });
     io.observe(line);
   }
@@ -142,7 +156,8 @@ const jsonLd = {
   }
   .steps .step-now::before { left: var(--step-6); top: var(--step-4); }
   .now-label { display: block; color: var(--glow); text-transform: uppercase; }
-  .ghost { transition: color var(--motion-climb); }
+  .ghost { transition: color var(--motion-climb), opacity 600ms ease; }
+  .faded .ghost, .faded .tab-key { opacity: 0; }
   .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
   .tab-key { display: none; }
   .suggesting .ghost { color: var(--ink-faint); font-style: italic; }
@@ -152,7 +167,7 @@ const jsonLd = {
     display: inline-block; margin-left: var(--step-2); padding: 0 var(--step-2); vertical-align: 2px;
     background: var(--ground); border: 1px solid var(--slab); border-radius: 8px; box-shadow: var(--shadow-slab-sm);
     font: 500 11px/20px var(--font-mono); color: var(--ink-muted);
-    transition: transform 120ms, box-shadow 120ms;
+    transition: transform 120ms, box-shadow 120ms, opacity 600ms ease;
   }
   .pressing .tab-key { transform: translate(3px, 3px); box-shadow: none; }
   @keyframes blink { 50% { opacity: 0; } }
