@@ -25,7 +25,7 @@ export const skills = [
   { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
 ];
 
-export type ArtKind = "xr" | "events" | "watch" | "emotions" | "price" | "keyboard";
+export type ArtKind = "xr" | "cat" | "watch" | "emotions" | "price" | "keyboard";
 
 export type Project = {
   title: string;
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     title: "Strawanzer",
-    art: "events",
+    art: "cat",
     description: "South Tyrol's events platform.",
     status: "archived",
     liveUrl: "https://strawanzer.events",
