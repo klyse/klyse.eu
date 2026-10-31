@@ -12,11 +12,16 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-export const about = [
-  `I'm Klaus, a software architect at Durst Group with ${workYears}+ years of experience in backend and DevOps. I started out in C and C++ and today mostly design and build C# backends.`,
-  "Before that, at Innoactive, I worked on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
-  "On the side I build my own things, like Strawanzer and Premer. I like learning, I like teams, and I speak more than one language, in code and out of it.",
-];
+export const about = {
+  lede: `I'm Klaus, a software architect with ${workYears}+ years in backend and DevOps.`,
+  path: [
+    { when: "Now", where: "Durst Group", what: "Software architect. I mostly design and build C# backends.", href: links.durst },
+    { when: "Before", where: "Innoactive", what: "XR cloud rendering for enterprises: streaming VR and AR apps from the cloud to headsets around the world." },
+    { when: "Started", where: "C & C++", what: "Where it began, close to the metal." },
+    { when: "On the side", where: "Strawanzer, Premer & co.", what: "My own things, built for the fun of it.", href: "#projects" },
+  ],
+  outro: "I like learning, I like teams, and I speak more than one language, in code and out of it.",
+};
 
 export const skills = [
   { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
