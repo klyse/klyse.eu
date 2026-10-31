@@ -12,26 +12,17 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-// A story, not a CV: plain strings are prose, objects render as slab pills.
+// Plain strings are prose, objects render as slab pills.
 type StoryPart = string | { pill: string; href?: string };
 
-export const about: {
-  lede: string;
-  shift: { from: { title: string; note: string }; to: { title: string; note: string } };
-  story: StoryPart[];
-  outro: string;
-} = {
-  lede: "I started out writing near-realtime C++, where every millisecond counts.",
-  shift: {
-    from: { title: "C++", note: "near-realtime" },
-    to: { title: "Whole systems", note: "C#, TypeScript & co." },
-  },
-  story: [
-    "Over time the scope grew: from single components to whole systems, with whatever language fits the job. Today I'm a software architect at ",
-    { pill: "Durst Group", href: links.durst },
-    ", and on the side I build my own things, like Strawanzer and Premer.",
+export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
+  lede: "I started out writing near-realtime C++, where every millisecond counts, and no AI wrote a single line of it.",
+  steps: [
+    ["Then I moved on to backend services, across different databases and different languages."],
+    ["Then I started building frontends and my own apps, front to back, product included."],
+    ["Now I design systems front to back at ", { pill: "Durst Group", href: links.durst }, ", finally with AI helping out."],
   ],
-  outro: "I like learning, I like teams, and I speak more than one language, in code and out of it.",
+  outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
 };
 
 export const skills = [

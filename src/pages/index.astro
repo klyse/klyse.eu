@@ -25,22 +25,17 @@ import { about, skills, projects, links } from "../data/site";
       <div class="about">
         <div class="about-text">
           <p class="about-lede">{about.lede}</p>
-          <div class="shift" aria-label={`From ${about.shift.from.title} to ${about.shift.to.title}`}>
-            <div class="shift-end">
-              <span class="shift-title">{about.shift.from.title}</span>
-              <span class="shift-note t-meta">{about.shift.from.note}</span>
-            </div>
-            <span class="shift-arrow" aria-hidden="true">→</span>
-            <div class="shift-end shift-to">
-              <span class="shift-title">{about.shift.to.title}</span>
-              <span class="shift-note t-meta">{about.shift.to.note}</span>
-            </div>
-          </div>
-          <p class="story">
-            {about.story.map((part) =>
-              typeof part === "string" ? part : <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
-            )}
-          </p>
+          <ol class="steps">
+            {
+              about.steps.map((step) => (
+                <li>
+                  {step.map((part) =>
+                    typeof part === "string" ? part : <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
           <p class="about-outro">{about.outro}</p>
         </div>
         <Tabs tabs={skills} />
@@ -84,23 +79,15 @@ import { about, skills, projects, links } from "../data/site";
   .about { display: grid; grid-template-columns: 7fr 5fr; gap: var(--step-18); align-items: start; }
   .about > :global(.tabs) { position: sticky; top: 112px; }
   .about-lede { margin: 0 0 var(--step-8); max-width: 26ch; font-family: var(--font-display); font-size: 32px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
-  .story { margin: 0 0 var(--step-4); max-width: 58ch; line-height: 34px; }
-  .about-outro { margin: 0; max-width: 58ch; color: var(--ink-muted); }
+  .about-outro { margin: var(--step-8) 0 0; max-width: 58ch; color: var(--ink-muted); }
 
-  /* The move up the stack: two slabs joined by a dashed arrow */
-  .shift { display: flex; align-items: center; margin: 0 0 var(--step-8); }
-  .shift-end {
-    display: flex; flex-direction: column; gap: 2px; padding: var(--step-3) var(--step-4);
-    background: var(--ground-sunken); border: 1px solid var(--line-strong); border-radius: var(--radius-md);
-  }
-  .shift-to { background: var(--ground-raised); border-color: var(--slab); box-shadow: var(--shadow-slab-sm); }
-  .shift-title { font: 700 20px/1.1 var(--font-display); letter-spacing: -0.02em; }
-  .shift-note { color: var(--ink-muted); }
-  .shift-arrow { margin: 0 var(--step-3); font: 400 20px/1 var(--font-sans); color: var(--ink-muted); }
-
+  /* Each move is one line, led by an arrow */
+  .steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--step-3); }
+  .steps li { position: relative; max-width: 58ch; padding-left: var(--step-8); line-height: 32px; }
+  .steps li::before { content: "→"; position: absolute; left: 0; color: var(--glow); font-weight: 600; }
   /* The one link in the prose sits on a little slab */
   .pill {
-    display: inline-block; padding: 0 var(--step-3); line-height: 28px; white-space: nowrap;
+    display: inline-block; margin-right: 4px; padding: 0 var(--step-3); line-height: 28px; white-space: nowrap;
     background: var(--glow); color: var(--on-glow);
     border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: var(--shadow-slab-sm);
     font-weight: 600; text-decoration: none;
@@ -113,6 +100,6 @@ import { about, skills, projects, links } from "../data/site";
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: var(--step-12); } .about > :global(.tabs) { position: static; } }
-  @media (max-width: 620px) { .about-lede { font-size: 26px; } .shift-title { font-size: 17px; } }
+  @media (max-width: 620px) { .about-lede { font-size: 26px; } }
   @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
 </style>
