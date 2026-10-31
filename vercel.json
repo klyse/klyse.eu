@@ -3,5 +3,11 @@
   "framework": "astro",
   "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
 }
