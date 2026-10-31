@@ -10,7 +10,7 @@ export const links = {
 };
 
 export const hero = {
-  lede: "I build apps that solve real problems, at work and on my own, and I make sure they feel good to use.",
+  lede: "I build apps that solve real problems, at work and after hours, and I make sure they feel good to use.",
 };
 
 // Plain strings are prose, `pill` renders a slab link, `ghost` renders AI-autocomplete text.
