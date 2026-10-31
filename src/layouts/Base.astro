@@ -7,9 +7,12 @@ interface Props {
 }
 
 const {
-  title = "klaus. — Klaus Prünster, software architect",
+  title = "Klaus Prünster — software architect · klaus.",
   description = "Klaus Prünster, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/images/og.jpg", Astro.site);
 ---
 
 <!doctype html>
@@ -26,13 +29,27 @@ const {
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="author" content="Klaus Prünster" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#efe9df" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="klaus." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL("/images/portrait-wide.jpg", Astro.site)} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Portrait of Klaus Prünster" />
+    <meta property="profile:first_name" content="Klaus" />
+    <meta property="profile:last_name" content="Prünster" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
