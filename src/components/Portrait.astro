@@ -1,13 +1,28 @@
 ---
+import { Picture } from "astro:assets";
+import portrait from "../assets/portrait.jpg";
+
 interface Props {
   size?: number;
+  /** Width below 860px, where the hero stacks; must match the CSS that sets it */
+  mobileSize?: number;
 }
 
-const { size = 360 } = Astro.props;
+const { size = 360, mobileSize = size } = Astro.props;
+// 1x–3x for the mobile size, 1x–2x for the desktop size
+const widths = [...new Set([mobileSize, mobileSize * 2, mobileSize * 3, size, size * 2])].sort((a, b) => a - b);
 ---
 
 <span class="portrait" style={`--size:${size}px`}>
-  <img src="/images/portrait.jpg" alt="Klaus" width="800" height="800" loading="eager" />
+  <Picture
+    src={portrait}
+    alt="Klaus"
+    formats={["avif", "webp"]}
+    widths={widths}
+    sizes={`(max-width: 860px) ${mobileSize}px, min(${size}px, 72vw)`}
+    loading="eager"
+    fetchpriority="high"
+  />
 </span>
 
 <style>
@@ -22,5 +37,6 @@ const { size = 360 } = Astro.props;
   /* Same physics as the buttons: lift onto a deeper slab on hover, press into it on click */
   @media (hover: hover) { .portrait:hover { transform: translate(calc(var(--lift) * -1), calc(var(--lift) * -1)); box-shadow: calc(var(--slab-rest) + var(--lift)) calc(var(--slab-rest) + var(--lift)) 0 0 var(--slab); } }
   .portrait:active { transform: translate(var(--slab-rest), var(--slab-rest)); box-shadow: none; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .portrait :global(picture) { display: contents; }
+  .portrait :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 </style>

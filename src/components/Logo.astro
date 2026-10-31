@@ -7,11 +7,14 @@ interface Props {
 
 // The mark alone is the inline Mark component; this one swaps the night/day SVG files.
 const { kind = "lockup", height = 40, alt = "klaus." } = Astro.props;
+// viewBox aspect ratios of the SVG files, so the images are sized before they load
+const ratio = { wordmark: 280 / 92, lockup: 409 / 92 }[kind];
+const width = Math.round(height * ratio);
 ---
 
 <span class="logo" style={`height:${height}px`}>
-  <img class="logo-night" src={`/brand/klaus-${kind}-night.svg`} alt={alt} height={height} />
-  <img class="logo-day" src={`/brand/klaus-${kind}-day.svg`} alt={alt} height={height} />
+  <img class="logo-night" src={`/brand/klaus-${kind}-night.svg`} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+  <img class="logo-day" src={`/brand/klaus-${kind}-day.svg`} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
 </span>
 
 <style>
