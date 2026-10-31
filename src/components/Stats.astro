@@ -23,7 +23,7 @@ import { stats } from "../data/site";
 
 <style>
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--step-12); margin-bottom: 0; }
-  .stat { display: flex; flex-direction: column-reverse; gap: var(--step-2); padding: var(--step-6); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: var(--step-2); padding: var(--step-6); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
   .stat:first-child { padding-left: 0; }
   .stat:last-child { border-right: 0; }
   dt { color: var(--ink-muted); text-transform: uppercase; }
@@ -42,7 +42,9 @@ import { stats } from "../data/site";
   .suffix:hover::after, .suffix:focus-visible::after { opacity: 1; transform: translate(-50%, -6px); }
   @media (max-width: 720px) {
     .stats { grid-template-columns: 1fr 1fr; }
-    .stat { padding-left: 0; }
+    .stat { padding-inline: var(--step-4); }
+    .stat:nth-child(odd) { padding-left: 0; }
+    .stat:nth-child(even) { padding-right: 0; }
     .stat:nth-child(2) { border-right: 0; }
     .stat:nth-child(n + 3) { border-top: 0; }
   }
