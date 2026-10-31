@@ -27,13 +27,26 @@ import { about, skills, projects, links } from "../data/site";
           <p class="about-lede">{about.lede}</p>
           <ol class="steps">
             {
-              about.steps.map((step) => (
-                <li>
-                  {step.map((part) =>
-                    typeof part === "string" ? part : <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
-                  )}
-                </li>
-              ))
+              about.steps.map((step, i) => {
+                const now = i === about.steps.length - 1;
+                return (
+                  <li class:list={[now && "step-now"]} data-autocomplete={now ? "" : undefined}>
+                    {now && <span class="now-label t-meta">Now</span>}
+                    {step.map((part) =>
+                      typeof part === "string" ? (
+                        part
+                      ) : "ghost" in part ? (
+                        <>
+                          <span class="ghost">{part.ghost}</span>
+                          <kbd class="tab-key" aria-hidden="true">Tab ⇥</kbd>
+                        </>
+                      ) : (
+                        <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
+                      )
+                    )}
+                  </li>
+                );
+              })
             }
           </ol>
           <p class="about-outro">{about.outro}</p>
@@ -75,6 +88,22 @@ import { about, skills, projects, links } from "../data/site";
   <Footer />
 </Base>
 
+<script>
+  // The "Now" line plays a code-completion: the AI part waits as ghost text, then Tab accepts it.
+  // Without JS (or with reduced motion) the line simply renders accepted.
+  const line = document.querySelector<HTMLElement>("[data-autocomplete]");
+  if (line && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    line.classList.add("suggesting");
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      setTimeout(() => line.classList.add("pressing"), 1400);
+      setTimeout(() => line.classList.replace("suggesting", "accepted"), 1600);
+    }, { threshold: 1 });
+    io.observe(line);
+  }
+</script>
+
 <style>
   .about { display: grid; grid-template-columns: 7fr 5fr; gap: var(--step-18); align-items: start; }
   .about > :global(.tabs) { position: sticky; top: 112px; }
@@ -85,6 +114,29 @@ import { about, skills, projects, links } from "../data/site";
   .steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--step-3); }
   .steps li { position: relative; max-width: 58ch; padding-left: var(--step-8); line-height: 32px; }
   .steps li::before { content: "→"; position: absolute; left: 0; color: var(--glow); font-weight: 600; }
+
+  /* Now: a raised slab where the AI part arrives as an accepted autocomplete */
+  .steps .step-now {
+    margin-top: var(--step-3); padding: var(--step-4) var(--step-6) var(--step-4) calc(var(--step-6) + var(--step-8));
+    background: var(--ground-raised); border: 1px solid var(--slab); border-radius: var(--radius-lg); box-shadow: var(--shadow-slab);
+    font-size: 19px; line-height: 34px;
+  }
+  .steps .step-now::before { left: var(--step-6); top: var(--step-4); }
+  .now-label { display: block; color: var(--glow); text-transform: uppercase; }
+  .ghost { transition: color var(--motion-climb); }
+  .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .tab-key { display: none; }
+  .suggesting .ghost { color: var(--ink-faint); font-style: italic; }
+  .suggesting .ghost::after { display: none; }
+  .suggesting .ghost::before { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-right: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .suggesting .tab-key {
+    display: inline-block; margin-left: var(--step-2); padding: 0 var(--step-2); vertical-align: 2px;
+    background: var(--ground); border: 1px solid var(--slab); border-radius: 8px; box-shadow: var(--shadow-slab-sm);
+    font: 500 11px/20px var(--font-mono); color: var(--ink-muted);
+    transition: transform 120ms, box-shadow 120ms;
+  }
+  .pressing .tab-key { transform: translate(3px, 3px); box-shadow: none; }
+  @keyframes blink { 50% { opacity: 0; } }
   /* The one link in the prose sits on a little slab */
   .pill {
     display: inline-block; margin-right: 4px; padding: 0 var(--step-3); line-height: 28px; white-space: nowrap;
@@ -100,6 +152,6 @@ import { about, skills, projects, links } from "../data/site";
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: var(--step-12); } .about > :global(.tabs) { position: static; } }
-  @media (max-width: 620px) { .about-lede { font-size: 26px; } }
+  @media (max-width: 620px) { .about-lede { font-size: 26px; } .steps .step-now { font-size: 17px; padding-left: calc(var(--step-4) + var(--step-8)); padding-right: var(--step-4); } .steps .step-now::before { left: var(--step-4); } }
   @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
 </style>

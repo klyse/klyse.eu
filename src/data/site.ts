@@ -12,15 +12,15 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-// Plain strings are prose, objects render as slab pills.
-type StoryPart = string | { pill: string; href?: string };
+// Plain strings are prose, `pill` renders a slab link, `ghost` renders AI-autocomplete text.
+type StoryPart = string | { pill: string; href?: string } | { ghost: string };
 
 export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   lede: "I started out writing near-realtime C++, where every millisecond counts, and no AI wrote a single line of it.",
   steps: [
     ["Then I moved on to backend services, across different databases and different languages."],
     ["Then I started building frontends and my own apps, front to back, product included."],
-    ["Now I design systems front to back at ", { pill: "Durst Group", href: links.durst }, ", finally with AI helping out."],
+    ["At ", { pill: "Durst Group", href: links.durst }, " I now design systems front to back, ", { ghost: "finally with AI helping out." }],
   ],
   outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
 };
