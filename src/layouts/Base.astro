@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Klaus Prünster — software architect · klaus.",
-  description = "Klaus Prünster, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
+  title = "klaus. — Klaus, software architect",
+  description = "Klaus, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -29,7 +29,7 @@ const ogImage = new URL("/images/og.jpg", Astro.site);
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Klaus Prünster" />
+    <meta name="author" content="Klaus" />
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -45,9 +45,8 @@ const ogImage = new URL("/images/og.jpg", Astro.site);
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Portrait of Klaus Prünster" />
+    <meta property="og:image:alt" content="Portrait of Klaus" />
     <meta property="profile:first_name" content="Klaus" />
-    <meta property="profile:last_name" content="Prünster" />
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
