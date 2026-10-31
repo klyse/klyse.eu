@@ -15,29 +15,23 @@ export const hero = {
 // A story, not a CV: plain strings are prose, objects render as slab pills.
 type StoryPart = string | { pill: string; href?: string };
 
-export const about: { lede: string; story: StoryPart[][]; likes: string[] } = {
-  lede: "I'm Klaus. I design backends for a living and build my own things for fun.",
+export const about: {
+  lede: string;
+  shift: { from: { title: string; note: string }; to: { title: string; note: string } };
+  story: StoryPart[];
+  outro: string;
+} = {
+  lede: "I started out writing near-realtime C++, where every millisecond counts.",
+  shift: {
+    from: { title: "C++", note: "near-realtime" },
+    to: { title: "C# & TypeScript", note: "backends & frontends" },
+  },
   story: [
-    [
-      "It started with ",
-      { pill: "C and C++" },
-      `. ${workYears}+ years later I'm a software architect at `,
-      { pill: "Durst Group", href: links.durst },
-      ", mostly designing ",
-      { pill: "C# backends" },
-      " and the DevOps around them.",
-    ],
-    [
-      "Before that, at Innoactive, I was ",
-      { pill: "streaming VR and AR from the cloud" },
-      " to headsets around the world. On the side there's ",
-      { pill: "Strawanzer", href: "#projects" },
-      ", ",
-      { pill: "Premer", href: "#projects" },
-      " and whatever I'm curious about next.",
-    ],
+    "Then I moved up the stack to higher-level languages, building backend services and frontends. Today I'm a software architect at ",
+    { pill: "Durst Group", href: links.durst },
+    ", and on the side I build my own things, like Strawanzer and Premer.",
   ],
-  likes: ["I like learning", "I like teams", "I speak more than one language"],
+  outro: "I like learning, I like teams, and I speak more than one language, in code and out of it.",
 };
 
 export const skills = [
