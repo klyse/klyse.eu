@@ -23,7 +23,7 @@ const { href, variant = "primary", meta, external = false } = Astro.props;
     font: 600 15px/20px var(--font-sans); text-decoration: none;
     transition: transform var(--motion-step), box-shadow var(--motion-step);
   }
-  .btn:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); }
+  @media (hover: hover) { .btn:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); } }
   .btn:active { transform: translate(3px, 3px); box-shadow: none; }
   .btn-primary { background: var(--glow); color: var(--on-glow); }
   .btn-secondary { background: var(--ink); color: var(--ground); }

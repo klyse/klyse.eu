@@ -12,13 +12,6 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-export const stats = [
-  { value: "10,000", suffix: "+", label: "GitHub contributions" },
-  { value: "6", label: "Projects" },
-  { prefix: "~", value: "7", label: "Hackathons" },
-  { value: String(workYears), suffix: "+", label: "Years building" },
-];
-
 export const about = [
   `I'm Klaus, a software architect at Durst Group with ${workYears}+ years of experience in backend and DevOps. I started out in C and C++ and today mostly design and build C# backends.`,
   "Before that, at Innoactive, I worked on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
@@ -86,4 +79,11 @@ export const projects: Project[] = [
     description: "An LED-based shortcut helper for Logitech keyboards.",
     codeUrl: "https://github.com/klyse/LogitechKeyboardLED",
   },
+];
+
+export const stats = [
+  { value: "10,000", suffix: "+", label: "GitHub contributions" },
+  { value: String(projects.length), label: "Projects" },
+  { prefix: "~", value: "7", label: "Hackathons" },
+  { value: String(workYears), suffix: "+", label: "Years building" },
 ];

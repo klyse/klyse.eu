@@ -28,6 +28,6 @@ const k = "M23 13V83M23 62L66 21M42 45L68 83";
   .mark-face circle { fill: var(--glow); }
   .mark-face { transition: transform var(--motion-step); }
   /* SVG user units: the slab sits 5 behind; hover doubles the gap, press closes it */
-  :global(a:hover) > .mark .mark-face { transform: translate(-6px, -6px); }
+  @media (hover: hover) { :global(a:hover) > .mark .mark-face { transform: translate(-6px, -6px); } }
   :global(a:active) > .mark .mark-face { transform: translate(5px, 5px); }
 </style>

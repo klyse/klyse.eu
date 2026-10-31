@@ -43,7 +43,7 @@ const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
     border: 1px solid var(--slab); border-radius: var(--radius-lg); box-shadow: var(--shadow-slab-sm);
     transition: transform var(--motion-step), box-shadow var(--motion-step);
   }
-  .card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); }
+  @media (hover: hover) { .card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); } }
   .card-archived { background: var(--ground); }
   .card-head { display: flex; justify-content: space-between; color: var(--ink-muted); }
   h3 { margin: var(--step-2) 0 0; }

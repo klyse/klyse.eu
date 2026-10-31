@@ -3,7 +3,7 @@
 // the pick is stored and applied before first paint by the inline script in Base.astro.
 ---
 
-<button class="theme-toggle" type="button" aria-label="Switch theme" data-theme-toggle>
+<button class="theme-toggle" type="button" aria-label="Switch theme" data-theme-toggle hidden>
   <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="4.5" />
     <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" />
@@ -22,11 +22,13 @@
     const next = current() === "night" ? "day" : "night";
     button.setAttribute("aria-label", `Switch to ${next} theme`);
     document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((m) => {
-      m.content = current() === "night" ? "#14110f" : "#efe9df";
+      m.content = getComputedStyle(root).getPropertyValue("--ground").trim();
     });
   };
 
   for (const button of document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")) {
+    // Rendered hidden so it never shows as a dead button without JS.
+    button.hidden = false;
     sync(button);
     button.addEventListener("click", () => {
       const next = current() === "night" ? "day" : "night";
@@ -48,7 +50,8 @@
     border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: var(--shadow-slab-sm);
     transition: transform var(--motion-step), box-shadow var(--motion-step);
   }
-  .theme-toggle:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); }
+  @media (hover: hover) { .theme-toggle:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); } }
+  .theme-toggle[hidden] { display: none; }
   .theme-toggle:active { transform: translate(3px, 3px); box-shadow: none; }
   .icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
