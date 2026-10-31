@@ -1,0 +1,53 @@
+---
+import type { Project } from "../data/site";
+
+interface Props extends Project {
+  number: string;
+}
+
+const { number, title, description, year, status, stack, liveUrl, codeUrl } = Astro.props;
+const meta = [year, status === "archived" ? "Archived" : status === "live" ? "Live" : undefined].filter(Boolean).join(" · ");
+---
+
+<article class:list={["card", status === "archived" && "card-archived"]}>
+  <header class="card-head t-meta">
+    <span>{number}</span>
+    {meta && <span>{meta}</span>}
+  </header>
+  <h3 class="t-heading">{title}</h3>
+  <p class="card-desc">{description}</p>
+  {
+    stack && stack.length > 0 && (
+      <ul class="card-stack">
+        {stack.map((s) => <li>{s}</li>)}
+      </ul>
+    )
+  }
+  {
+    (liveUrl || codeUrl) && (
+      <footer class="card-links">
+        {liveUrl && <a href={liveUrl} target="_blank" rel="noreferrer">Visit ↗</a>}
+        {codeUrl && <a href={codeUrl} target="_blank" rel="noreferrer">Source ↗</a>}
+      </footer>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    display: flex; flex-direction: column; gap: var(--step-3); height: 100%;
+    padding: var(--step-6); background: var(--ground-raised);
+    border: 1px solid var(--slab); border-radius: var(--radius-lg); box-shadow: var(--shadow-slab-sm);
+    transition: transform var(--motion-step), box-shadow var(--motion-step);
+  }
+  .card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); }
+  .card-archived { background: var(--ground); }
+  .card-head { display: flex; justify-content: space-between; color: var(--ink-muted); }
+  h3 { margin: var(--step-2) 0 0; }
+  .card-desc { margin: 0; color: var(--ink-muted); }
+  .card-stack { display: flex; flex-wrap: wrap; gap: var(--step-2); margin: var(--step-1) 0 0; padding: 0; list-style: none; }
+  .card-stack li { padding: var(--step-1) 10px; border: 1px solid var(--line); border-radius: var(--radius-pill); font: 400 12px/16px var(--font-mono); color: var(--ink-muted); }
+  .card-links { display: flex; gap: var(--step-6); margin-top: auto; padding-top: var(--step-3); border-top: 1px solid var(--line); }
+  .card-links a { font: 600 15px/20px var(--font-sans); text-decoration: none; }
+  .card-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+</style>

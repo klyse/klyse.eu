@@ -1,0 +1,39 @@
+@import "./tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 96px; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 17px/28px var(--font-sans); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: var(--glow); }
+:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+::selection { background: var(--glow); color: var(--on-glow); }
+
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--step-12); }
+@media (max-width: 720px) { .wrap { padding: 0 var(--step-4); } }
+
+/* Responsive display sizes (tokens are the desktop maximum) */
+.t-hero { font-size: clamp(64px, 13vw, 120px); }
+.t-title { font-size: clamp(40px, 7vw, 56px); }
+.t-stat { font-size: clamp(36px, 5.6vw, 64px); white-space: nowrap; }
+
+/* The wordmark's full stop sits on its slab */
+.dot { color: var(--glow); text-shadow: 5px 5px 0 var(--slab); }
+
+/* Logo files swap with the theme */
+.logo-day { display: none; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="night"]) .logo-night { display: none; } :root:not([data-theme="night"]) .logo-day { display: block; } }
+:root[data-theme="day"] .logo-night { display: none; }
+:root[data-theme="day"] .logo-day { display: block; }
+
+/* Sections rise once into view */
+.section { padding-top: var(--step-30); }
+.rise { opacity: 0; transform: translateY(12px); transition: opacity var(--motion-climb) ease-out, transform var(--motion-climb) ease-out; }
+.rise.in { opacity: 1; transform: none; }
+.section-head { display: flex; flex-direction: column; gap: var(--step-4); margin-bottom: var(--step-12); }
+.section-head h2 { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0ms !important; }
+}

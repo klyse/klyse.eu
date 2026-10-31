@@ -1,0 +1,77 @@
+const workStart = new Date(2014, 7, 1);
+export const workYears = new Date().getFullYear() - workStart.getFullYear();
+
+export const links = {
+  github: "https://github.com/klyse",
+  linkedin: "https://www.linkedin.com/in/klauspruenster/",
+  innoactive: "https://innoactive.io",
+  source: "https://github.com/klyse/klyse.eu",
+};
+
+export const hero = {
+  lede: "I build C# backends and the cloud pipelines that ship them. Backend and DevOps first, with a soft spot for a good frontend.",
+};
+
+export const stats = [
+  { value: "10,000", suffix: "+", label: "GitHub contributions" },
+  { value: "6", label: "Projects" },
+  { prefix: "~", value: "7", label: "Hackathons" },
+  { value: String(workYears), suffix: "+", label: "Years building" },
+];
+
+export const about = [
+  `I'm Klaus, a developer with ${workYears}+ years of experience, focused on backend and DevOps. I started out in C and C++ and today mostly build C# backends.`,
+  "At Innoactive I work on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
+  "On the side I build my own things, like Strawanzer and Premer. I like learning, I like teams, and I speak more than one language, in code and out of it.",
+];
+
+export const skills = [
+  { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
+  { id: "frontend", title: "Frontend", items: ["React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
+  { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
+];
+
+export type Project = {
+  title: string;
+  description: string;
+  year?: string;
+  status?: "live" | "archived";
+  stack?: string[];
+  liveUrl?: string;
+  codeUrl?: string;
+};
+
+// TODO(klaus): add `year` and `stack` per project, and check which ones are still online.
+export const projects: Project[] = [
+  {
+    title: "XR Cloud Rendering",
+    description: "Globally scaled cloud rendering for XR applications, at Innoactive.",
+    status: "live",
+    liveUrl: "https://www.innoactive.io/",
+  },
+  {
+    title: "Strawanzer",
+    description: "South Tyrol's events platform.",
+    status: "archived",
+  },
+  {
+    title: "Premer",
+    description: "Presentation timer for Apple Watch.",
+    codeUrl: "https://github.com/klyse/premer",
+  },
+  {
+    title: "Magun",
+    description: "Share those emotions.",
+    status: "archived",
+  },
+  {
+    title: "Price Tracking",
+    description: "Price tracking for supermarkets.",
+    status: "archived",
+  },
+  {
+    title: "Logitech Keyboard LED",
+    description: "An LED-based shortcut helper for Logitech keyboards.",
+    codeUrl: "https://github.com/klyse/LogitechKeyboardLED",
+  },
+];

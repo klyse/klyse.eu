@@ -1,0 +1,94 @@
+/* klaus. — generated from the design system tokens.json. Edit the tokens there, then regenerate. */
+
+:root {
+  color-scheme: dark;
+  --ground: #14110f;
+  --ground-raised: #1e1a17;
+  --ground-sunken: #0d0b0a;
+  --ink: #f2ebe1;
+  --ink-muted: #a99d90;
+  --ink-faint: #5a5049;
+  --line: #2f2925;
+  --line-strong: #7a6e64;
+  --slab: #f2ebe1;
+  --glow: #ff7a59;
+  --on-glow: #1a0d08;
+  --pine: #7cc495;
+  --sun: #f0b440;
+  --shadow-slab-sm: 3px 3px 0 0 #f2ebe1;
+  --shadow-slab: 6px 6px 0 0 #f2ebe1;
+  --shadow-slab-lg: 12px 12px 0 0 #f2ebe1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) {
+    color-scheme: light;
+    --ground: #efe9df;
+    --ground-raised: #f8f4ed;
+    --ground-sunken: #e3dbcd;
+    --ink: #1b1613;
+    --ink-muted: #5e544b;
+    --ink-faint: #a39788;
+    --line: #d4cabb;
+    --line-strong: #8a7e71;
+    --slab: #1b1613;
+    --glow: #b63c1b;
+    --on-glow: #ffffff;
+    --pine: #2e6a45;
+    --sun: #8a5a00;
+    --shadow-slab-sm: 3px 3px 0 0 #1b1613;
+    --shadow-slab: 6px 6px 0 0 #1b1613;
+    --shadow-slab-lg: 12px 12px 0 0 #1b1613;
+  }
+}
+
+:root[data-theme="day"] {
+  color-scheme: light;
+  --ground: #efe9df;
+  --ground-raised: #f8f4ed;
+  --ground-sunken: #e3dbcd;
+  --ink: #1b1613;
+  --ink-muted: #5e544b;
+  --ink-faint: #a39788;
+  --line: #d4cabb;
+  --line-strong: #8a7e71;
+  --slab: #1b1613;
+  --glow: #b63c1b;
+  --on-glow: #ffffff;
+  --pine: #2e6a45;
+  --sun: #8a5a00;
+  --shadow-slab-sm: 3px 3px 0 0 #1b1613;
+  --shadow-slab: 6px 6px 0 0 #1b1613;
+  --shadow-slab-lg: 12px 12px 0 0 #1b1613;
+}
+
+:root {
+  --step-1: 4px;
+  --step-2: 8px;
+  --step-3: 12px;
+  --step-4: 16px;
+  --step-6: 24px;
+  --step-8: 32px;
+  --step-12: 48px;
+  --step-18: 72px;
+  --step-30: 120px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --motion-step: 160ms;
+  --motion-climb: 520ms;
+  --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, monospace;
+}
+
+/* Type styles */
+.t-hero { font-family: var(--font-display); font-size: 120px; line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; }
+.t-title { font-family: var(--font-display); font-size: 56px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; }
+.t-stat { font-family: var(--font-display); font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; }
+.t-heading { font-family: var(--font-display); font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+.t-lede { font-family: var(--font-sans); font-size: 21px; line-height: 32px; font-weight: 400; }
+.t-body { font-family: var(--font-sans); font-size: 17px; line-height: 28px; font-weight: 400; }
+.t-label { font-family: var(--font-sans); font-size: 15px; line-height: 20px; font-weight: 600; }
+.t-meta { font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0.04em; }
+.t-code { font-family: var(--font-mono); font-size: 14px; line-height: 22px; font-weight: 400; }

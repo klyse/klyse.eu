@@ -1,0 +1,30 @@
+---
+import Logo from "./Logo.astro";
+
+const items = [
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="nav-home" aria-label="klaus. — home"><Logo kind="mark" height={40} /></a>
+    <nav aria-label="Main">
+      <ul>
+        {items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--ground); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  .nav-home { display: inline-flex; }
+  ul { display: flex; gap: var(--step-8); margin: 0; padding: 0; list-style: none; }
+  ul a { font: 600 15px/20px var(--font-sans); color: var(--ink-muted); text-decoration: none; transition: color var(--motion-step); }
+  ul a:hover { color: var(--ink); }
+  @media (max-width: 520px) { ul { gap: var(--step-4); } }
+</style>

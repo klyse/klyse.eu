@@ -1,0 +1,21 @@
+---
+import Logo from "./Logo.astro";
+import { links } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <Logo kind="lockup" height={36} alt="klaus." />
+    <p class="t-meta">© {year} Klaus Prünster · <a href={links.source} target="_blank" rel="noreferrer">Source</a></p>
+  </div>
+</footer>
+
+<style>
+  .footer { margin-top: var(--step-30); background: var(--ground-sunken); border-top: 1px solid var(--line); }
+  .footer-inner { display: flex; flex-wrap: wrap; gap: var(--step-6); align-items: center; justify-content: space-between; padding-top: var(--step-12); padding-bottom: var(--step-12); }
+  p { margin: 0; color: var(--ink-muted); }
+  a { color: var(--ink-muted); }
+  a:hover { color: var(--ink); }
+</style>

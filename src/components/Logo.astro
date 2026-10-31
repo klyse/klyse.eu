@@ -1,0 +1,19 @@
+---
+interface Props {
+  kind?: "mark" | "wordmark" | "lockup";
+  height?: number;
+  alt?: string;
+}
+
+const { kind = "mark", height = 40, alt = "klaus." } = Astro.props;
+---
+
+<span class="logo" style={`height:${height}px`}>
+  <img class="logo-night" src={`/brand/klaus-${kind}-night.svg`} alt={alt} height={height} />
+  <img class="logo-day" src={`/brand/klaus-${kind}-day.svg`} alt="" aria-hidden="true" height={height} />
+</span>
+
+<style>
+  .logo { display: inline-flex; }
+  .logo img { height: 100%; width: auto; }
+</style>
