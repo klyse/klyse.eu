@@ -12,15 +12,32 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-export const about = {
-  lede: `I'm Klaus, a software architect with ${workYears}+ years in backend and DevOps.`,
-  path: [
-    { when: "Now", where: "Durst Group", what: "Software architect. I mostly design and build C# backends.", href: links.durst },
-    { when: "Before", where: "Innoactive", what: "XR cloud rendering for enterprises: streaming VR and AR apps from the cloud to headsets around the world." },
-    { when: "Started", where: "C & C++", what: "Where it began, close to the metal." },
-    { when: "On the side", where: "Strawanzer, Premer & co.", what: "My own things, built for the fun of it.", href: "#projects" },
+// A story, not a CV: plain strings are prose, objects render as slab pills.
+type StoryPart = string | { pill: string; href?: string };
+
+export const about: { lede: string; story: StoryPart[][]; likes: string[] } = {
+  lede: "I'm Klaus. I design backends for a living and build my own things for fun.",
+  story: [
+    [
+      "It started with ",
+      { pill: "C and C++" },
+      `. ${workYears}+ years later I'm a software architect at `,
+      { pill: "Durst Group", href: links.durst },
+      ", mostly designing ",
+      { pill: "C# backends" },
+      " and the DevOps around them.",
+    ],
+    [
+      "Before that, at Innoactive, I was ",
+      { pill: "streaming VR and AR from the cloud" },
+      " to headsets around the world. On the side there's ",
+      { pill: "Strawanzer", href: "#projects" },
+      ", ",
+      { pill: "Premer", href: "#projects" },
+      " and whatever I'm curious about next.",
+    ],
   ],
-  outro: "I like learning, I like teams, and I speak more than one language, in code and out of it.",
+  likes: ["I like learning", "I like teams", "I speak more than one language"],
 };
 
 export const skills = [

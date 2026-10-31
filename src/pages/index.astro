@@ -24,22 +24,26 @@ import { about, skills, projects, links } from "../data/site";
       </div>
       <div class="about">
         <div class="about-text">
-          <p class="about-lede t-lede">{about.lede}</p>
-          <ol class="path">
-            {
-              about.path.map((s, i) => (
-                <li class:list={["step", i === 0 && "step-now"]}>
-                  <span class="step-node" aria-hidden="true" />
-                  <span class="step-when t-meta">{s.when}</span>
-                  <h3 class="step-where">
-                    {s.href ? <a href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel={s.href.startsWith("http") ? "noreferrer" : undefined}>{s.where}</a> : s.where}
-                  </h3>
-                  <p class="step-what">{s.what}</p>
-                </li>
-              ))
-            }
-          </ol>
-          <p class="about-outro">{about.outro}</p>
+          <p class="about-lede">{about.lede}</p>
+          {
+            about.story.map((para) => (
+              <p class="story">
+                {para.map((part) =>
+                  typeof part === "string" ? (
+                    part
+                  ) : part.href ? (
+                    <a class="pill" href={part.href} target={part.href.startsWith("http") ? "_blank" : undefined} rel={part.href.startsWith("http") ? "noreferrer" : undefined}>{part.pill}</a>
+                  ) : (
+                    <span class="pill">{part.pill}</span>
+                  )
+                )}
+              </p>
+            ))
+          }
+          <ul class="likes">
+            {about.likes.map((l) => <li>{l}</li>)}
+          </ul>
+          <p class="likes-tail">…in code and out of it.</p>
         </div>
         <Tabs tabs={skills} />
       </div>
@@ -81,38 +85,40 @@ import { about, skills, projects, links } from "../data/site";
 <style>
   .about { display: grid; grid-template-columns: 7fr 5fr; gap: var(--step-18); align-items: start; }
   .about > :global(.tabs) { position: sticky; top: 112px; }
-  .about-lede { margin: 0 0 var(--step-8); max-width: 30ch; font-family: var(--font-display); font-size: 32px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
-  .about-outro { margin: var(--step-8) 0 0; max-width: 52ch; color: var(--ink-muted); }
+  .about-lede { margin: 0 0 var(--step-8); max-width: 26ch; font-family: var(--font-display); font-size: 32px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  .story { margin: 0 0 var(--step-6); max-width: 58ch; font-size: 19px; line-height: 40px; }
 
-  /* Career path: a rail of round nodes, the current stop glowing */
-  .path { position: relative; margin: 0; padding: 0; list-style: none; }
-  .path::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 2px; background: repeating-linear-gradient(var(--line-strong) 0 6px, transparent 6px 12px); }
-  .step { position: relative; display: grid; grid-template-columns: 24px 1fr; column-gap: var(--step-6); padding: var(--step-3) 0 var(--step-6); }
-  .step-node {
-    position: relative; grid-row: 1 / span 3; width: 24px; height: 24px; margin-top: 2px;
-    background: var(--ground-raised); border: 1px solid var(--slab); border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-slab-sm);
+  /* Key words sit on little slabs inside the prose */
+  .pill {
+    display: inline-block; padding: 0 var(--step-3); margin: 0 2px;
+    line-height: 30px; white-space: nowrap;
+    background: var(--ground-raised); color: var(--ink);
+    border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: var(--shadow-slab-sm);
+    font-weight: 600; text-decoration: none;
     transition: transform var(--motion-step), box-shadow var(--motion-step), background var(--motion-step);
   }
-  .step-now .step-node { background: var(--glow); }
-  .step-now .step-node::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid var(--glow); animation: ping 2.4s ease-out infinite; }
-  @media (hover: hover) {
-    .step:hover .step-node { transform: translate(-2px, -2px); box-shadow: var(--shadow-slab); }
-    .step:not(.step-now):hover .step-node { background: var(--sun); }
+  a.pill { background: var(--glow); color: var(--on-glow); }
+  @media (hover: hover) { .pill:hover { transform: translate(-2px, -2px) rotate(-2deg); box-shadow: var(--shadow-slab); } }
+  a.pill:active { transform: translate(3px, 3px); box-shadow: none; }
+
+  /* Round stickers, slapped on slightly crooked */
+  .likes { display: flex; flex-wrap: wrap; margin: var(--step-12) 0 0; padding: 0; list-style: none; }
+  .likes li {
+    display: grid; place-items: center; width: clamp(104px, 28vw, 136px); aspect-ratio: 1; margin-right: -10px; padding: var(--step-4);
+    border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: var(--shadow-slab-sm);
+    color: var(--on-glow); text-align: center; font: 700 15px/1.15 var(--font-display);
+    transition: transform var(--motion-climb) cubic-bezier(.3, 1.5, .5, 1), box-shadow var(--motion-step);
   }
-  .step-when { color: var(--ink-muted); text-transform: uppercase; }
-  .step-now .step-when { color: var(--glow); }
-  .step-where { margin: var(--step-1) 0 0; font: 700 24px/1.15 var(--font-display); letter-spacing: -0.02em; }
-  .step-where a { color: inherit; text-decoration: none; background: linear-gradient(var(--glow), var(--glow)) 0 100% / 0 2px no-repeat; transition: background-size var(--motion-climb); }
-  .step-where a:hover { background-size: 100% 2px; }
-  .step-what { margin: var(--step-1) 0 0; max-width: 52ch; color: var(--ink-muted); }
-  @keyframes ping { 0% { transform: scale(1); opacity: .8; } 80%, 100% { transform: scale(2.2); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .step-now .step-node::after { animation: none; } }
+  .likes li:nth-child(1) { background: var(--glow); transform: rotate(-8deg); }
+  .likes li:nth-child(2) { background: var(--pine); transform: rotate(5deg) translateY(10px); }
+  .likes li:nth-child(3) { background: var(--sun); transform: rotate(-3deg); }
+  @media (hover: hover) { .likes li:hover { transform: rotate(0) scale(1.08); box-shadow: var(--shadow-slab); z-index: 1; } }
+  .likes-tail { margin: var(--step-6) 0 0; font: 400 12px/16px var(--font-mono); letter-spacing: .04em; color: var(--ink-muted); }
   .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--step-8); margin: 0; padding: 0 6px 6px 0; list-style: none; }
   .contact-text { margin: 0; max-width: 52ch; color: var(--ink-muted); }
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: var(--step-12); } .about > :global(.tabs) { position: static; } }
-  @media (max-width: 620px) { .about-lede { font-size: 26px; } .step-where { font-size: 21px; } }
+  @media (max-width: 620px) { .about-lede { font-size: 26px; } .story { font-size: 17px; line-height: 38px; } }
   @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
 </style>
