@@ -1,5 +1,5 @@
 ---
-import Logo from "./Logo.astro";
+import Mark from "./Mark.astro";
 
 const items = [
   { href: "#about", label: "About" },
@@ -10,7 +10,7 @@ const items = [
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="/" class="nav-home" aria-label="klaus. — home"><Logo kind="mark" height={40} /></a>
+    <a href="/" class="nav-home" aria-label="klaus. — home"><Mark height={40} /></a>
     <nav aria-label="Main">
       <ul>
         {items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}

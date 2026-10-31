@@ -12,7 +12,8 @@ bun run build    # static site in dist/
 
 - `src/styles/tokens.css`: design tokens (colours per theme, type, spacing, radii, the slab shadows) from the **klaus.** design system.
 - `src/styles/global.css`: base styles and the component classes.
-- `src/components/`: Nav, Hero, Button, SectionMarker, Stats, Tabs, ProjectCard, Portrait, Footer.
+- `src/components/`: Nav, Mark (the inline k. mark with its hover lift), Logo (night/day wordmark and lockup files), Hero, Button, SectionMarker, Stats, Tabs, ProjectCard, Portrait, Footer.
+- `vercel.json`: pins the Vercel build to Astro + bun, output in `dist/`.
 - `src/data/site.ts`: copy, projects, skills and stats in one place.
 - `public/brand/`, `public/images/`: logo files and photos.
 
