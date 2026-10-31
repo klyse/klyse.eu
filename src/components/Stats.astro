@@ -23,7 +23,7 @@ import { stats } from "../data/site";
 
 <style>
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--step-12); margin-bottom: 0; }
-  .stat { display: flex; flex-direction: column-reverse; gap: var(--step-2); padding: var(--step-6); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: var(--step-2); padding: var(--step-6); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
   .stat:first-child { padding-left: 0; }
   .stat:last-child { border-right: 0; }
   dt { color: var(--ink-muted); text-transform: uppercase; }
