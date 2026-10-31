@@ -18,7 +18,6 @@ const person = {
   givenName: "Klaus",
   alternateName: "klyse",
   url: site,
-  image: new URL("/images/portrait.jpg", site).href,
   jobTitle: "Software Architect",
   worksFor: { "@type": "Organization", name: "Durst Group", url: links.durst },
   knowsAbout: [...new Set(skills.flatMap((s) => s.items))],
