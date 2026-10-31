@@ -1,4 +1,10 @@
 ---
+// Fonts are self-hosted (bundled from @fontsource) so no visitor data goes to Google Fonts.
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource/hanken-grotesk/400.css";
+import "@fontsource/hanken-grotesk/600.css";
+import "@fontsource/martian-mono/400.css";
+import "@fontsource/martian-mono/500.css";
 import "../styles/global.css";
 
 interface Props {
@@ -51,12 +57,6 @@ const ogImage = new URL("/images/og.png", Astro.site);
     <meta property="profile:first_name" content="Klaus" />
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Hanken+Grotesk:wght@400;600&family=Martian+Mono:wght@400;500&display=swap"
-    />
   </head>
   <body>
     <slot />
