@@ -27,7 +27,11 @@ import { hero, links } from "../data/site";
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-12); }
   .hero-photo { justify-self: end; padding: 0 12px 12px 0; }
   @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; padding-top: var(--step-12); }
+    .hero { grid-template-columns: 1fr; gap: var(--step-8); padding-top: var(--step-8); }
     .hero-photo { justify-self: start; grid-row: 1; }
+    .hero-photo :global(.portrait) { width: 168px; box-shadow: var(--shadow-slab); }
+    .hero-kicker { margin-bottom: var(--step-3); }
+    .hero-lede { margin-top: var(--step-6); }
+    .hero-actions { margin-top: var(--step-8); gap: var(--step-4); }
   }
 </style>

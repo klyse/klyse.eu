@@ -1,15 +1,17 @@
 ---
 import type { Project } from "../data/site";
+import ProjectArt from "./ProjectArt.astro";
 
 interface Props extends Project {
   number: string;
 }
 
-const { number, title, description, year, status, stack, liveUrl, codeUrl } = Astro.props;
+const { number, title, description, art, year, status, stack, liveUrl, codeUrl } = Astro.props;
 const meta = [year, status === "archived" ? "Archived" : status === "live" ? "Live" : undefined].filter(Boolean).join(" · ");
 ---
 
 <article class:list={["card", status === "archived" && "card-archived"]}>
+  <ProjectArt kind={art} archived={status === "archived"} />
   <header class="card-head t-meta">
     <span>{number}</span>
     {meta && <span>{meta}</span>}
@@ -35,7 +37,7 @@ const meta = [year, status === "archived" ? "Archived" : status === "live" ? "Li
 
 <style>
   .card {
-    display: flex; flex-direction: column; gap: var(--step-3); height: 100%;
+    display: flex; flex-direction: column; gap: var(--step-3); height: 100%; overflow: hidden;
     padding: var(--step-6); background: var(--ground-raised);
     border: 1px solid var(--slab); border-radius: var(--radius-lg); box-shadow: var(--shadow-slab-sm);
     transition: transform var(--motion-step), box-shadow var(--motion-step);

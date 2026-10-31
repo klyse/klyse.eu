@@ -25,15 +25,12 @@ a { color: var(--glow); }
 :root[data-theme="day"] .logo-night { display: none; }
 :root[data-theme="day"] .logo-day { display: block; }
 
-/* Sections rise once into view; only when JS runs, so content never stays hidden */
 .section { padding-top: var(--step-30); }
-.js .rise { opacity: 0; transform: translateY(12px); transition: opacity var(--motion-climb) ease-out, transform var(--motion-climb) ease-out; }
-.js .rise.in { opacity: 1; transform: none; }
+@media (max-width: 720px) { .section { padding-top: var(--step-18); } }
 .section-head { display: flex; flex-direction: column; gap: var(--step-4); margin-bottom: var(--step-12); }
 .section-head h2 { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .rise { opacity: 1; transform: none; transition: none; }
   * { transition-duration: 0ms !important; }
 }

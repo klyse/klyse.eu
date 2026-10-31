@@ -17,7 +17,6 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>document.documentElement.classList.add("js");</script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
@@ -36,19 +35,5 @@ const {
   </head>
   <body>
     <slot />
-    <script>
-      const io = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              e.target.classList.add("in");
-              io.unobserve(e.target);
-            }
-          }
-        },
-        { rootMargin: "0px 0px -10% 0px" },
-      );
-      document.querySelectorAll(".rise").forEach((el) => io.observe(el));
-    </script>
   </body>
 </html>

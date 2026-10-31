@@ -31,9 +31,12 @@ export const skills = [
   { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
 ];
 
+export type ArtKind = "xr" | "events" | "watch" | "emotions" | "price" | "keyboard";
+
 export type Project = {
   title: string;
   description: string;
+  art: ArtKind;
   year?: string;
   status?: "live" | "archived";
   stack?: string[];
@@ -45,32 +48,38 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "XR Cloud Rendering",
+    art: "xr",
     description: "Globally scaled cloud rendering for XR applications, at Innoactive.",
     status: "live",
     liveUrl: "https://www.innoactive.io/",
   },
   {
     title: "Strawanzer",
+    art: "events",
     description: "South Tyrol's events platform.",
     status: "archived",
   },
   {
     title: "Premer",
+    art: "watch",
     description: "Presentation timer for Apple Watch.",
     codeUrl: "https://github.com/klyse/premer",
   },
   {
     title: "Magun",
+    art: "emotions",
     description: "Share those emotions.",
     status: "archived",
   },
   {
     title: "Price Tracking",
+    art: "price",
     description: "Price tracking for supermarkets.",
     status: "archived",
   },
   {
     title: "Logitech Keyboard LED",
+    art: "keyboard",
     description: "An LED-based shortcut helper for Logitech keyboards.",
     codeUrl: "https://github.com/klyse/LogitechKeyboardLED",
   },
