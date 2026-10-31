@@ -27,7 +27,7 @@ export const about: {
     to: { title: "Whole systems", note: "C#, TypeScript & co." },
   },
   story: [
-    "From there the problems grew: from tight loops to whole systems, in whatever language fits. Today I'm a software architect at ",
+    "Over time the scope grew: from single components to whole systems, with whatever language fits the job. Today I'm a software architect at ",
     { pill: "Durst Group", href: links.durst },
     ", and on the side I build my own things, like Strawanzer and Premer.",
   ],
