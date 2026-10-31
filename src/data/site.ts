@@ -6,6 +6,7 @@ export const links = {
   linkedin: "https://www.linkedin.com/in/klauspruenster/",
   durst: "https://www.durst-group.com",
   source: "https://github.com/klyse/klyse.eu",
+  email: "klaus.pruenster@gmail.com",
 };
 
 export const hero = {
@@ -25,7 +26,14 @@ export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
 };
 
-export type ArtKind = "xr" | "events" | "watch" | "emotions" | "price" | "keyboard";
+// Not shown on the page; feeds `knowsAbout` in the structured data.
+export const skills = [
+  { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
+  { id: "frontend", title: "Frontend", items: ["Astro", "React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
+  { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
+];
+
+export type ArtKind = "xr" | "cat" | "watch" | "emotions" | "price" | "keyboard";
 
 export type Project = {
   title: string;
@@ -49,7 +57,7 @@ export const projects: Project[] = [
   },
   {
     title: "Strawanzer",
-    art: "events",
+    art: "cat",
     description: "South Tyrol's events platform.",
     status: "archived",
     liveUrl: "https://strawanzer.events",

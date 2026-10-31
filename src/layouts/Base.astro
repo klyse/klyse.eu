@@ -1,4 +1,10 @@
 ---
+// Fonts are self-hosted (bundled from @fontsource) so no visitor data goes to Google Fonts.
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource/hanken-grotesk/400.css";
+import "@fontsource/hanken-grotesk/600.css";
+import "@fontsource/martian-mono/400.css";
+import "@fontsource/martian-mono/500.css";
 import "../styles/global.css";
 
 interface Props {
@@ -7,9 +13,12 @@ interface Props {
 }
 
 const {
-  title = "klaus. — Klaus Prünster, software architect",
-  description = "Klaus Prünster, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
+  title = "klaus. — Klaus, software architect",
+  description = "Klaus, software architect at Durst Group. I build apps that solve real problems for people and customers, and make them feel good to use.",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/images/og.png", Astro.site);
 ---
 
 <!doctype html>
@@ -26,19 +35,28 @@ const {
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="author" content="Klaus" />
+    <!-- Keep the portrait out of image search; the share card is the logo, not a photo -->
+    <meta name="robots" content="noimageindex" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#efe9df" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="klaus." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL("/images/portrait-wide.jpg", Astro.site)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Hanken+Grotesk:wght@400;600&family=Martian+Mono:wght@400;500&display=swap"
-    />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="klaus. logo" />
+    <meta property="profile:first_name" content="Klaus" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
   </head>
   <body>
     <slot />

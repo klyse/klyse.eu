@@ -10,7 +10,11 @@ import { stats } from "../data/site";
         <dd class="t-stat">
           {s.prefix}
           {s.value}
-          {s.suffix && <span class="suffix">{s.suffix}</span>}
+          {s.suffix && (
+            <span class="suffix" tabindex="0" data-hint="and counting" aria-label="plus, and counting">
+              {s.suffix}
+            </span>
+          )}
         </dd>
       </div>
     ))
@@ -24,7 +28,18 @@ import { stats } from "../data/site";
   .stat:last-child { border-right: 0; }
   dt { color: var(--ink-muted); text-transform: uppercase; }
   dd { margin: 0; }
-  .suffix { color: var(--glow); }
+  .suffix { position: relative; display: inline-block; color: var(--glow); cursor: help; transition: transform 160ms ease; }
+  /* Pill tag with the slab shadow, lifting in above the plus */
+  .suffix::after {
+    content: attr(data-hint); position: absolute; left: 50%; bottom: 100%; z-index: 1;
+    padding: var(--step-1) var(--step-2); white-space: nowrap;
+    font-family: inherit; font-size: 0.75rem; font-weight: 600; line-height: 1.2; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink); background: var(--ground-raised); border: 1px solid var(--line-strong); border-radius: 999px; box-shadow: var(--shadow-slab-sm);
+    opacity: 0; pointer-events: none; transform: translate(-50%, 4px); transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .suffix:focus-visible { outline: none; }
+  .suffix:hover, .suffix:focus-visible { transform: translate(-3px, -3px); }
+  .suffix:hover::after, .suffix:focus-visible::after { opacity: 1; transform: translate(-50%, -6px); }
   @media (max-width: 720px) {
     .stats { grid-template-columns: 1fr 1fr; }
     .stat { padding-left: 0; }

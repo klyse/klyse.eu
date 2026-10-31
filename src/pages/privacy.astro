@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import SectionMarker from "../components/SectionMarker.astro";
+import Footer from "../components/Footer.astro";
+import { links } from "../data/site";
+
+const updated = "31 October 2026";
+---
+
+<Base title="Privacy — klaus." description="Privacy notice for klyse.eu.">
+  <Nav sections={false} />
+  <main>
+    <section class="section wrap">
+      <div class="section-head">
+        <SectionMarker number="§" label="Privacy" />
+        <h1 class="t-title">Privacy notice</h1>
+      </div>
+      <div class="prose">
+        <p>
+          klyse.eu is my private, non-commercial website. This notice explains how personal data is handled when you
+          visit it.
+        </p>
+
+        <h2 class="t-heading">Who is responsible</h2>
+        <p>
+          Email: <a href={`mailto:${links.email}`}>{links.email}</a>
+        </p>
+
+        <h2 class="t-heading">Hosting</h2>
+        <p>
+          The site runs with an external hosting provider. To deliver pages and keep the site secure, technical data
+          such as your IP address, the time of your visit, the page requested and your browser details may be processed
+          and logged. This is based on my legitimate interest in running a working, secure website (Art. 6(1)(f) GDPR).
+          The data is kept only as long as needed for these purposes.
+        </p>
+        <p>
+          The hosting provider may process data outside the EU, including in the USA. Where that happens, it is covered
+          by the safeguards the GDPR provides for, such as adequacy decisions or standard contractual clauses.
+        </p>
+
+        <h2 class="t-heading">Settings in your browser</h2>
+        <p>
+          The site may store small settings in your browser, such as your choice of light or dark theme, so it can
+          remember them. You can delete them at any time in your browser settings.
+        </p>
+
+        <h2 class="t-heading">Links to other sites</h2>
+        <p>The site links to other websites. Their own privacy policies apply once you follow a link.</p>
+
+        <h2 class="t-heading">Your rights</h2>
+        <p>
+          Under the GDPR you have the right to access, correct and delete your data, to restrict or object to its
+          processing, and to data portability. Just write to me at the address above. You can also lodge a complaint with
+          a supervisory authority, in Italy the Garante per la protezione dei dati personali.
+        </p>
+
+        <h2 class="t-heading">Changes</h2>
+        <p>I may update this notice when the site changes. The current version is always on this page.</p>
+
+        <p class="t-meta">Last updated: {updated}</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .section-head h1 { margin: 0; }
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 var(--step-4); }
+  .prose h2 { margin: var(--step-12) 0 var(--step-4); }
+  .t-meta { margin-top: var(--step-12); color: var(--ink-muted); }
+</style>
