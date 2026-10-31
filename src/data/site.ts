@@ -18,8 +18,8 @@ type StoryPart = string | { pill: string; href?: string } | { ghost: string };
 export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   lede: "I started out writing near-realtime C++, where every millisecond counts, and no AI wrote a single line of it.",
   steps: [
-    ["Then I moved on to backend services, across different databases and different languages."],
-    ["Then I started building frontends and my own apps, front to back, product included."],
+    ["Next came backend services, across different databases and different languages."],
+    ["Later I added frontends and started shipping my own apps, front to back, product included."],
     ["At ", { pill: "Durst Group", href: links.durst }, " I now design systems front to back, ", { ghost: "finally with AI helping out." }],
   ],
   outro: "I like efficient teams, using the best language for the job, and solving customers' problems.",
