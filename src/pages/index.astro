@@ -30,7 +30,7 @@ import { about, skills, projects, links } from "../data/site";
               <span class="shift-title">{about.shift.from.title}</span>
               <span class="shift-note t-meta">{about.shift.from.note}</span>
             </div>
-            <span class="shift-arrow" aria-hidden="true" />
+            <span class="shift-arrow" aria-hidden="true">→</span>
             <div class="shift-end shift-to">
               <span class="shift-title">{about.shift.to.title}</span>
               <span class="shift-note t-meta">{about.shift.to.note}</span>
@@ -96,10 +96,7 @@ import { about, skills, projects, links } from "../data/site";
   .shift-to { background: var(--ground-raised); border-color: var(--slab); box-shadow: var(--shadow-slab-sm); }
   .shift-title { font: 700 20px/1.1 var(--font-display); letter-spacing: -0.02em; }
   .shift-note { color: var(--ink-muted); }
-  .shift-arrow { position: relative; flex: 1; max-width: 120px; min-width: 32px; height: 2px; margin: 0 var(--step-2) 0 var(--step-3); background: repeating-linear-gradient(90deg, var(--glow) 0 6px, transparent 6px 12px); }
-  .shift-arrow::after { content: ""; position: absolute; right: -2px; top: -5px; border: 6px solid transparent; border-left: 8px solid var(--glow); border-right: 0; }
-  @media (hover: hover) { .shift:hover .shift-arrow { animation: march .6s linear infinite; } }
-  @keyframes march { to { background-position: 12px 0; } }
+  .shift-arrow { margin: 0 var(--step-3); font: 400 20px/1 var(--font-sans); color: var(--ink-muted); }
 
   /* The one link in the prose sits on a little slab */
   .pill {

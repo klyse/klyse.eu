@@ -24,10 +24,10 @@ export const about: {
   lede: "I started out writing near-realtime C++, where every millisecond counts.",
   shift: {
     from: { title: "C++", note: "near-realtime" },
-    to: { title: "C# & TypeScript", note: "backends & frontends" },
+    to: { title: "Whole systems", note: "C#, TypeScript & co." },
   },
   story: [
-    "Then I moved up the stack to higher-level languages, building backend services and frontends. Today I'm a software architect at ",
+    "From there the problems grew: from tight loops to whole systems, in whatever language fits. Today I'm a software architect at ",
     { pill: "Durst Group", href: links.durst },
     ", and on the side I build my own things, like Strawanzer and Premer.",
   ],
