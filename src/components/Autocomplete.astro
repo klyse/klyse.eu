@@ -1,0 +1,65 @@
+---
+// AI code-completion on loop: the text fades in as ghost text, Tab accepts it, it holds, then fades out
+// and gets suggested again. Several options cycle, one per loop. Without JS (or with reduced motion) the
+// first one renders accepted.
+interface Props {
+  text: string | string[];
+}
+
+const options = [Astro.props.text].flat();
+---
+
+<span class="autocomplete" data-autocomplete={JSON.stringify(options)}><span class="ghost">{options[0]}</span><kbd class="tab-key" aria-hidden="true">Tab ⇥</kbd></span>
+
+<script>
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  async function play(el: HTMLElement) {
+    const ghost = el.querySelector<HTMLElement>(".ghost")!;
+    const options: string[] = JSON.parse(el.dataset.autocomplete!);
+    for (let i = 1; ; i++) {
+      el.classList.remove("faded");
+      await wait(1800);
+      el.classList.add("pressing");
+      await wait(200);
+      el.classList.remove("pressing", "suggesting");
+      await wait(3200);
+      el.classList.add("faded");
+      await wait(700);
+      ghost.textContent = options[i % options.length];
+      el.classList.add("suggesting");
+      await wait(500);
+    }
+  }
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    for (const el of document.querySelectorAll<HTMLElement>("[data-autocomplete]")) {
+      el.classList.add("suggesting", "faded");
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        play(el);
+      }, { threshold: 1 });
+      io.observe(el);
+    }
+  }
+</script>
+
+<style>
+  .ghost { transition: color var(--motion-climb), opacity 600ms ease; }
+  .faded .ghost, .faded .tab-key { opacity: 0; }
+  .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .tab-key { display: none; }
+  /* Muted, not faint: still readable (WCAG AA) while it waits; italic + cursor + Tab key mark it as a suggestion */
+  .suggesting .ghost { color: var(--ink-muted); font-style: italic; }
+  .suggesting .ghost::after { display: none; }
+  .suggesting .ghost::before { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-right: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .suggesting .tab-key {
+    display: inline-block; margin-left: var(--step-2); padding: 0 var(--step-2); vertical-align: 2px;
+    background: var(--ground); border: 1px solid var(--slab); border-radius: 8px; box-shadow: var(--shadow-slab-sm);
+    font: 500 11px/20px var(--font-mono); color: var(--ink-muted);
+    transition: transform 120ms, box-shadow 120ms, opacity 600ms ease;
+  }
+  .pressing .tab-key { transform: translate(3px, 3px); box-shadow: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>

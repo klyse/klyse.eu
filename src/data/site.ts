@@ -27,6 +27,12 @@ export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
   outro: "I like efficient teams and solving customers' problems.",
 };
 
+// The ghosts cycle as AI suggestions for what to send.
+export const contact = {
+  text: "I'm always up for a good conversation. The quickest way to reach me is LinkedIn, so send me ",
+  ghosts: ["a question.", "an idea.", "a project you're planning.", "a hackathon invite.", "just a hello."],
+};
+
 // Not shown on the page; feeds `knowsAbout` in the structured data.
 export const skills = [
   { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },

@@ -7,7 +7,8 @@ import SectionMarker from "../components/SectionMarker.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Button from "../components/Button.astro";
 import Footer from "../components/Footer.astro";
-import { about, skills, projects, links } from "../data/site";
+import Autocomplete from "../components/Autocomplete.astro";
+import { about, contact, skills, projects, links } from "../data/site";
 
 const site = Astro.site!.href;
 const person = {
@@ -51,16 +52,13 @@ const jsonLd = {
               about.steps.map((step, i) => {
                 const now = i === about.steps.length - 1;
                 return (
-                  <li class:list={[now && "step-now"]} data-autocomplete={now ? "" : undefined}>
+                  <li class:list={[now && "step-now"]}>
                     {now && <span class="now-label t-meta">Now</span>}
                     {step.map((part) =>
                       typeof part === "string" ? (
                         part
                       ) : "ghost" in part ? (
-                        <>
-                          <span class="ghost">{part.ghost}</span>
-                          <kbd class="tab-key" aria-hidden="true">Tab ⇥</kbd>
-                        </>
+                        <Autocomplete text={part.ghost} />
                       ) : (
                         <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
                       )
@@ -97,7 +95,7 @@ const jsonLd = {
         <h2 class="t-title">Let's talk</h2>
       </div>
       <p class="contact-text">
-        I'm always up for a good conversation: questions, ideas, or just hello. The quickest way to reach me is LinkedIn.
+        {contact.text}<Autocomplete text={contact.ghosts} />
       </p>
       <div class="contact-actions">
         <Button href={links.linkedin} meta="↗" external>LinkedIn</Button>
@@ -107,36 +105,6 @@ const jsonLd = {
   </main>
   <Footer />
 </Base>
-
-<script>
-  // The "Now" line plays a code-completion on loop: the AI part fades in as ghost text, Tab accepts it,
-  // it holds, then fades out and gets suggested again. Without JS (or with reduced motion) it renders accepted.
-  const line = document.querySelector<HTMLElement>("[data-autocomplete]");
-  if (line && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    line.classList.add("suggesting", "faded");
-    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-    const play = async () => {
-      for (;;) {
-        line.classList.remove("faded");
-        await wait(1800);
-        line.classList.add("pressing");
-        await wait(200);
-        line.classList.remove("pressing", "suggesting");
-        await wait(3200);
-        line.classList.add("faded");
-        await wait(700);
-        line.classList.add("suggesting");
-        await wait(500);
-      }
-    };
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
-      play();
-    }, { threshold: 1 });
-    io.observe(line);
-  }
-</script>
 
 <style>
   .about { max-width: 720px; }
@@ -156,22 +124,6 @@ const jsonLd = {
   }
   .steps .step-now::before { left: var(--step-6); top: var(--step-4); }
   .now-label { display: block; color: var(--glow); text-transform: uppercase; }
-  .ghost { transition: color var(--motion-climb), opacity 600ms ease; }
-  .faded .ghost, .faded .tab-key { opacity: 0; }
-  .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
-  .tab-key { display: none; }
-  /* Muted, not faint: still readable (WCAG AA) while it waits; italic + cursor + Tab key mark it as a suggestion */
-  .suggesting .ghost { color: var(--ink-muted); font-style: italic; }
-  .suggesting .ghost::after { display: none; }
-  .suggesting .ghost::before { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-right: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
-  .suggesting .tab-key {
-    display: inline-block; margin-left: var(--step-2); padding: 0 var(--step-2); vertical-align: 2px;
-    background: var(--ground); border: 1px solid var(--slab); border-radius: 8px; box-shadow: var(--shadow-slab-sm);
-    font: 500 11px/20px var(--font-mono); color: var(--ink-muted);
-    transition: transform 120ms, box-shadow 120ms, opacity 600ms ease;
-  }
-  .pressing .tab-key { transform: translate(3px, 3px); box-shadow: none; }
-  @keyframes blink { 50% { opacity: 0; } }
   /* The one link in the prose sits on a little slab */
   .pill {
     display: inline-block; margin-right: 4px; padding: 0 var(--step-3); line-height: 28px; white-space: nowrap;
