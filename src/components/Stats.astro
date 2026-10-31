@@ -42,7 +42,9 @@ import { stats } from "../data/site";
   .suffix:hover::after, .suffix:focus-visible::after { opacity: 1; transform: translate(-50%, -6px); }
   @media (max-width: 720px) {
     .stats { grid-template-columns: 1fr 1fr; }
-    .stat { padding-left: 0; }
+    .stat { padding-inline: var(--step-4); }
+    .stat:nth-child(odd) { padding-left: 0; }
+    .stat:nth-child(even) { padding-right: 0; }
     .stat:nth-child(2) { border-right: 0; }
     .stat:nth-child(n + 3) { border-top: 0; }
   }
