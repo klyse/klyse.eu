@@ -4,7 +4,6 @@ import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import Stats from "../components/Stats.astro";
 import SectionMarker from "../components/SectionMarker.astro";
-import Tabs from "../components/Tabs.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Button from "../components/Button.astro";
 import Footer from "../components/Footer.astro";
@@ -46,9 +45,33 @@ const jsonLd = {
       </div>
       <div class="about">
         <div class="about-text">
-          {about.map((p) => <p>{p}</p>)}
+          <p class="about-lede">{about.lede}</p>
+          <ol class="steps">
+            {
+              about.steps.map((step, i) => {
+                const now = i === about.steps.length - 1;
+                return (
+                  <li class:list={[now && "step-now"]} data-autocomplete={now ? "" : undefined}>
+                    {now && <span class="now-label t-meta">Now</span>}
+                    {step.map((part) =>
+                      typeof part === "string" ? (
+                        part
+                      ) : "ghost" in part ? (
+                        <>
+                          <span class="ghost">{part.ghost}</span>
+                          <kbd class="tab-key" aria-hidden="true">Tab ⇥</kbd>
+                        </>
+                      ) : (
+                        <a class="pill" href={part.href} target="_blank" rel="noreferrer">{part.pill}</a>
+                      )
+                    )}
+                  </li>
+                );
+              })
+            }
+          </ol>
+          <p class="about-outro">{about.outro}</p>
         </div>
-        <Tabs tabs={skills} />
       </div>
     </section>
 
@@ -85,13 +108,68 @@ const jsonLd = {
   <Footer />
 </Base>
 
+<script>
+  // The "Now" line plays a code-completion: the AI part waits as ghost text, then Tab accepts it.
+  // Without JS (or with reduced motion) the line simply renders accepted.
+  const line = document.querySelector<HTMLElement>("[data-autocomplete]");
+  if (line && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    line.classList.add("suggesting");
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      setTimeout(() => line.classList.add("pressing"), 1400);
+      setTimeout(() => line.classList.replace("suggesting", "accepted"), 1600);
+    }, { threshold: 1 });
+    io.observe(line);
+  }
+</script>
+
 <style>
-  .about { display: grid; grid-template-columns: 1fr 1fr; gap: var(--step-12); align-items: start; }
-  .about-text p { margin: 0 0 var(--step-4); max-width: 62ch; }
+  .about { max-width: 720px; }
+  .about-lede { margin: 0 0 var(--step-8); max-width: 26ch; font-family: var(--font-display); font-size: 32px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  .about-outro { margin: var(--step-8) 0 0; max-width: 58ch; color: var(--ink-muted); }
+
+  /* Each move is one line, led by an arrow */
+  .steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--step-3); }
+  .steps li { position: relative; max-width: 58ch; padding-left: var(--step-8); line-height: 32px; }
+  .steps li::before { content: "→"; position: absolute; left: 0; color: var(--glow); font-weight: 600; }
+
+  /* Now: a raised slab where the AI part arrives as an accepted autocomplete */
+  .steps .step-now {
+    margin-top: var(--step-3); padding: var(--step-4) var(--step-6) var(--step-4) calc(var(--step-6) + var(--step-8));
+    background: var(--ground-raised); border: 1px solid var(--slab); border-radius: var(--radius-lg); box-shadow: var(--shadow-slab);
+    font-size: 19px; line-height: 34px;
+  }
+  .steps .step-now::before { left: var(--step-6); top: var(--step-4); }
+  .now-label { display: block; color: var(--glow); text-transform: uppercase; }
+  .ghost { transition: color var(--motion-climb); }
+  .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .tab-key { display: none; }
+  .suggesting .ghost { color: var(--ink-faint); font-style: italic; }
+  .suggesting .ghost::after { display: none; }
+  .suggesting .ghost::before { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-right: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
+  .suggesting .tab-key {
+    display: inline-block; margin-left: var(--step-2); padding: 0 var(--step-2); vertical-align: 2px;
+    background: var(--ground); border: 1px solid var(--slab); border-radius: 8px; box-shadow: var(--shadow-slab-sm);
+    font: 500 11px/20px var(--font-mono); color: var(--ink-muted);
+    transition: transform 120ms, box-shadow 120ms;
+  }
+  .pressing .tab-key { transform: translate(3px, 3px); box-shadow: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+  /* The one link in the prose sits on a little slab */
+  .pill {
+    display: inline-block; margin-right: 4px; padding: 0 var(--step-3); line-height: 28px; white-space: nowrap;
+    background: var(--glow); color: var(--on-glow);
+    border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: var(--shadow-slab-sm);
+    font-weight: 600; text-decoration: none;
+    transition: transform var(--motion-step), box-shadow var(--motion-step);
+  }
+  @media (hover: hover) { .pill:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-slab); } }
+  .pill:active { transform: translate(3px, 3px); box-shadow: none; }
   .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--step-8); margin: 0; padding: 0 6px 6px 0; list-style: none; }
   .contact-text { margin: 0; max-width: 52ch; color: var(--ink-muted); }
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .about-lede { font-size: 26px; } .steps .step-now { font-size: 17px; padding-left: calc(var(--step-4) + var(--step-8)); padding-right: var(--step-4); } .steps .step-now::before { left: var(--step-4); } }
   @media (max-width: 620px) { .projects { grid-template-columns: 1fr; } }
 </style>

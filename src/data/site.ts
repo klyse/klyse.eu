@@ -13,12 +13,21 @@ export const hero = {
   lede: "I build apps that solve real problems for people and customers, and I make sure they feel good to use.",
 };
 
-export const about = [
-  `I'm Klaus, a software architect at Durst Group with ${workYears}+ years of experience in backend and DevOps. I started out in C and C++ and today mostly design and build C# backends.`,
-  "Before that, at Innoactive, I worked on XR cloud rendering for enterprises: streaming VR and AR applications from the cloud to headsets around the world.",
-  "On the side I build my own things, like Strawanzer and Premer. I like learning, I like teams, and I speak more than one language, in code and out of it.",
-];
+// Plain strings are prose, `pill` renders a slab link, `ghost` renders AI-autocomplete text.
+type StoryPart = string | { pill: string; href?: string } | { ghost: string };
 
+export const about: { lede: string; steps: StoryPart[][]; outro: string } = {
+  lede: "I started out writing near-realtime C++, where every millisecond counts, and no AI wrote a single line of it.",
+  steps: [
+    ["Next came backend services, across different databases and different languages."],
+    ["Along the way I took on DevOps and infrastructure: CI/CD pipelines, containers and cloud setups on AWS, Azure and Google Cloud."],
+    ["Later I added frontends and started shipping my own apps, front to back, product included."],
+    ["At ", { pill: "Durst Group", href: links.durst }, " I now design systems front to back, ", { ghost: "finally with AI helping out." }],
+  ],
+  outro: "I like efficient teams and solving customers' problems.",
+};
+
+// Not shown on the page; feeds `knowsAbout` in the structured data.
 export const skills = [
   { id: "backend", title: "Backend", items: ["ASP.NET Core", "Node.js", "MongoDB", "Postgres", "Docker"] },
   { id: "frontend", title: "Frontend", items: ["Astro", "React", "SvelteKit", "TypeScript", "Mantine", "Tailwind CSS"] },
