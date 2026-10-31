@@ -145,7 +145,8 @@ const jsonLd = {
   .ghost { transition: color var(--motion-climb); }
   .ghost::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
   .tab-key { display: none; }
-  .suggesting .ghost { color: var(--ink-faint); font-style: italic; }
+  /* Muted, not faint: still readable (WCAG AA) while it waits; italic + cursor + Tab key mark it as a suggestion */
+  .suggesting .ghost { color: var(--ink-muted); font-style: italic; }
   .suggesting .ghost::after { display: none; }
   .suggesting .ghost::before { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-right: 2px; vertical-align: -0.15em; background: var(--glow); animation: blink 1s steps(1) infinite; }
   .suggesting .tab-key {
