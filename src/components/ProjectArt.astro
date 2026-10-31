@@ -27,6 +27,13 @@ function keys(): Shape[] {
   return out;
 }
 
+function priceBars(): Shape[] {
+  // weekly prices; the cheapest one is the deal
+  const heights = [52, 64, 46, 72, 58, 28, 40];
+  const low = heights.indexOf(Math.min(...heights));
+  return heights.map((h, i) => rect(64 + i * 26, 116 - h, 16, h, 8, i === low ? "accent" : "raised"));
+}
+
 function calendar(): Shape[] {
   const out: Shape[] = [];
   for (let row = 0; row < 3; row++)
@@ -41,10 +48,10 @@ const scenes: Record<ArtKind, Shape[]> = {
   events: calendar(),
   // a watch with straps; the ring is drawn separately below
   watch: [rect(128, -10, 44, 40, 12, "muted"), rect(128, 110, 44, 40, 12, "muted"), rect(112, 22, 76, 96, 26, "raised")],
-  // three overlapping moods
-  emotions: [disc(118, 74, 32, "muted"), disc(152, 62, 32, "raised"), disc(186, 76, 32, "accent")],
-  // a price tag
-  price: [rect(84, 42, 150, 56, 28, "accent"), disc(114, 70, 8, "raised", false), rect(138, 58, 70, 9, 4.5, "raised", false), rect(138, 74, 46, 9, 4.5, "raised", false)],
+  // three overlapping moods; their faces are drawn below
+  emotions: [disc(110, 72, 30, "muted"), disc(150, 64, 30, "raised"), disc(190, 74, 30, "accent")],
+  // a week of prices, the lowest one marked
+  price: priceBars(),
   // a keyboard with a few keys lit
   keyboard: keys(),
 };
@@ -71,6 +78,19 @@ const O = 4; // slab offset in viewBox units
         ),
       )
     }
+    {
+      kind === "emotions" && (
+        <g class="icon">
+          <circle class="icon-fill" cx="104" cy="68" r="2.6" />
+          <circle class="icon-fill" cx="116" cy="68" r="2.6" />
+          <path d="M102 76 Q110 84 118 76" />
+          <circle class="icon-fill" cx="144" cy="59" r="2.6" />
+          <circle class="icon-fill" cx="156" cy="59" r="2.6" />
+          <circle cx="150" cy="70" r="4.5" />
+          <path class="icon-fill" d="M190 83 C177 75 180 62 190 68 C200 62 203 75 190 83 Z" />
+        </g>
+      )
+    }
     {kind === "watch" && <circle class="ring" cx="150" cy="70" r="24" pathLength="100" stroke-dasharray="68 100" transform="rotate(-90 150 70)" />}
   </svg>
 </div>
@@ -83,6 +103,8 @@ const O = 4; // slab offset in viewBox units
   .accent { fill: var(--glow); }
   .raised { fill: var(--ground-raised); }
   .muted { fill: var(--ink-muted); }
+  .icon { fill: none; stroke: var(--slab); stroke-width: 2.6; stroke-linecap: round; }
+  .icon .icon-fill { fill: var(--slab); stroke: none; }
   .ring { fill: none; stroke: var(--glow); stroke-width: 7; stroke-linecap: round; }
   .art-archived .accent { fill: var(--ink-muted); }
   .art-archived .ring { stroke: var(--ink-muted); }
