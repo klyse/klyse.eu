@@ -65,6 +65,7 @@ export const projects: Project[] = [
     art: "watch",
     status: "archived",
     description: "Presentation timer for Apple Watch.",
+    liveUrl: "https://premer.klyse.eu",
     codeUrl: "https://github.com/klyse/premer",
   },
   {
