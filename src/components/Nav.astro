@@ -2,6 +2,13 @@
 import Mark from "./Mark.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
+interface Props {
+  // Section links only make sense on the one-pager; other pages just get the home mark.
+  sections?: boolean;
+}
+
+const { sections = true } = Astro.props;
+
 const items = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
@@ -13,11 +20,15 @@ const items = [
   <div class="wrap nav-inner">
     <a href="/" class="nav-home" aria-label="klaus. — home"><Mark height={40} /></a>
     <div class="nav-end">
-      <nav aria-label="Main">
-        <ul>
-          {items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
-        </ul>
-      </nav>
+      {
+        sections && (
+          <nav aria-label="Main">
+            <ul>
+              {items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+            </ul>
+          </nav>
+        )
+      }
       <ThemeToggle />
     </div>
   </div>

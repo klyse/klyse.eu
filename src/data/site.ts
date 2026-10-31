@@ -6,6 +6,7 @@ export const links = {
   linkedin: "https://www.linkedin.com/in/klauspruenster/",
   durst: "https://www.durst-group.com",
   source: "https://github.com/klyse/klyse.eu",
+  email: "klaus.pruenster@gmail.com",
 };
 
 export const hero = {

@@ -6,8 +6,10 @@ import { hero, links } from "../data/site";
 
 <section class="hero wrap">
   <div class="hero-text">
-    <p class="t-meta hero-kicker">Klaus · Software Architect</p>
-    <h1 class="t-hero">klaus<span class="dot"><span>.</span></span></h1>
+    <h1>
+      <span class="t-meta hero-kicker">Klaus · Software Architect</span>
+      <span class="t-hero">klaus<span class="dot"><span>.</span></span></span>
+    </h1>
     <p class="t-lede hero-lede">{hero.lede}</p>
     <div class="hero-actions">
       <Button href="#contact">Get in touch</Button>
@@ -15,7 +17,7 @@ import { hero, links } from "../data/site";
     </div>
   </div>
   <div class="hero-photo">
-    <Portrait size={380} />
+    <Portrait size={260} />
   </div>
 </section>
 
@@ -32,9 +34,11 @@ import { hero, links } from "../data/site";
 </script>
 
 <style>
-  .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--step-12); align-items: center; padding-top: var(--step-18); padding-bottom: var(--step-12); }
-  .hero-kicker { margin: 0 0 var(--step-6); color: var(--ink-muted); }
+  .hero { display: grid; grid-template-columns: 2fr 1fr; gap: var(--step-12); align-items: center; padding-top: var(--step-18); padding-bottom: var(--step-12); }
+  /* The kicker sits inside the h1 so the heading carries the name and title for search */
+  .hero-kicker { display: block; margin: 0 0 var(--step-6); color: var(--ink-muted); }
   h1 { margin: 0; }
+  h1 .t-hero { display: block; }
   /* The outer span is a still hit area so the pointer can't slip off mid-lift; only the inner one moves.
      The slab stays put: whatever the dot moves, its shadow offset moves back. */
   .dot { display: inline-block; cursor: pointer; user-select: none; }
@@ -50,11 +54,12 @@ import { hero, links } from "../data/site";
   @media (prefers-reduced-motion: reduce) { .dot.hop > span { animation: none; } }
   .hero-lede { margin: var(--step-8) 0 0; max-width: 34ch; color: var(--ink-muted); }
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-12); }
-  .hero-photo { justify-self: end; padding: 0 12px 12px 0; }
+  .hero-photo { justify-self: end; padding: 0 8px 8px 0; }
+  .hero-photo :global(.portrait) { --lift: 4px; --slab-rest: 8px; }
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; gap: var(--step-8); padding-top: var(--step-8); }
     .hero-photo { justify-self: start; grid-row: 1; }
-    .hero-photo :global(.portrait) { width: 168px; --lift: 3px; --slab-rest: 6px; }
+    .hero-photo :global(.portrait) { width: 112px; --lift: 2px; --slab-rest: 4px; }
     .hero-kicker { margin-bottom: var(--step-3); }
     .hero-lede { margin-top: var(--step-6); }
     .hero-actions { margin-top: var(--step-8); gap: var(--step-4); }
