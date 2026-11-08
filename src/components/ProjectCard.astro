@@ -8,7 +8,7 @@ interface Props extends Project {
 }
 
 const { number, title, tagline, description, art, year, status, stack, liveUrl, codeUrl, featured = false } = Astro.props;
-const statusLabel = { live: "Live", private: "Private", archived: "Archived" };
+const statusLabel = { live: "Live", beta: "Private beta", private: "Private", archived: "Archived" };
 const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
 const host = liveUrl && new URL(liveUrl).host;
 ---

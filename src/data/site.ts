@@ -42,7 +42,7 @@ export type Project = {
   description: string;
   art: ArtKind;
   year?: string;
-  status?: "live" | "private" | "archived";
+  status?: "live" | "beta" | "private" | "archived";
   stack?: string[];
   liveUrl?: string;
   codeUrl?: string;
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     art: "schyrm",
     description: "A free, private household app for iPhone. It keeps track of what a family has to keep up with (car, house, children) and reminds the right person in time.",
     year: "2026",
-    status: "live",
+    status: "beta",
     stack: ["Swift", "Go", "Postgres"],
     liveUrl: "https://schyrm.app",
     featured: true,
