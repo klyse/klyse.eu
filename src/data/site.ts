@@ -34,10 +34,11 @@ export const skills = [
   { id: "devops", title: "DevOps", items: ["AWS", "Azure", "Google Cloud", "GitHub Actions", "Docker", "Terraform"] },
 ];
 
-export type ArtKind = "xr" | "cat" | "watch" | "emotions" | "price" | "keyboard";
+export type ArtKind = "schyrm" | "xr" | "cat" | "watch" | "emotions" | "price" | "keyboard";
 
 export type Project = {
   title: string;
+  tagline?: string;
   description: string;
   art: ArtKind;
   year?: string;
@@ -45,10 +46,23 @@ export type Project = {
   stack?: string[];
   liveUrl?: string;
   codeUrl?: string;
+  // Shown as a wide card across the whole grid, with a "New" badge.
+  featured?: boolean;
 };
 
 // TODO(klaus): add `year` and `stack` per project, and check which ones are still online.
 export const projects: Project[] = [
+  {
+    title: "Schyrm",
+    tagline: "Alles auf dem Schyrm?",
+    art: "schyrm",
+    description: "A free, private household app for iPhone. It keeps track of what a family has to keep up with (car, house, children) and reminds the right person in time.",
+    year: "2026",
+    status: "live",
+    stack: ["Swift", "Go", "Postgres"],
+    liveUrl: "https://schyrm.app",
+    featured: true,
+  },
   {
     title: "XR Cloud Rendering",
     art: "xr",

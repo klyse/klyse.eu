@@ -1,40 +1,77 @@
 ---
 import type { Project } from "../data/site";
 import ProjectArt from "./ProjectArt.astro";
+import Button from "./Button.astro";
 
 interface Props extends Project {
   number: string;
 }
 
-const { number, title, description, art, year, status, stack, liveUrl, codeUrl } = Astro.props;
+const { number, title, tagline, description, art, year, status, stack, liveUrl, codeUrl, featured = false } = Astro.props;
 const statusLabel = { live: "Live", private: "Private", archived: "Archived" };
 const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
+const host = liveUrl && new URL(liveUrl).host;
 ---
 
-<article class:list={["card", status === "archived" && "card-archived"]}>
-  <ProjectArt kind={art} archived={status === "archived"} />
-  <header class="card-head t-meta">
-    <span>{number}</span>
-    {meta && <span>{meta}</span>}
-  </header>
-  <h3 class="t-heading">{title}</h3>
-  <p class="card-desc">{description}</p>
-  {
-    stack && stack.length > 0 && (
-      <ul class="card-stack">
-        {stack.map((s) => <li>{s}</li>)}
-      </ul>
-    )
-  }
-  {
-    (liveUrl || codeUrl) && (
-      <footer class="card-links">
-        {liveUrl && <a href={liveUrl} target="_blank" rel="noreferrer">Visit ↗</a>}
-        {codeUrl && <a href={codeUrl} target="_blank" rel="noreferrer">Source ↗</a>}
-      </footer>
-    )
-  }
-</article>
+{
+  featured ? (
+    <article class="card card-featured">
+      <ProjectArt kind={art} featured />
+      <div class="feature-body">
+        <header class="card-head t-meta">
+          <span class="feature-tags">
+            <span>{number}</span>
+            <span class="badge">New</span>
+          </span>
+          {meta && <span>{meta}</span>}
+        </header>
+        <h3 class="feature-title">{title}</h3>
+        {tagline && <p class="feature-tagline">{tagline}</p>}
+        <p class="feature-desc">{description}</p>
+        {
+          stack && stack.length > 0 && (
+            <ul class="card-stack">
+              {stack.map((s) => <li>{s}</li>)}
+            </ul>
+          )
+        }
+        {
+          (liveUrl || codeUrl) && (
+            <footer class="feature-links">
+              {liveUrl && <Button href={liveUrl} meta="↗" external>Visit {host}</Button>}
+              {codeUrl && <Button href={codeUrl} variant="quiet" meta="↗" external>Source</Button>}
+            </footer>
+          )
+        }
+      </div>
+    </article>
+  ) : (
+    <article class:list={["card", status === "archived" && "card-archived"]}>
+      <ProjectArt kind={art} archived={status === "archived"} />
+      <header class="card-head t-meta">
+        <span>{number}</span>
+        {meta && <span>{meta}</span>}
+      </header>
+      <h3 class="t-heading">{title}</h3>
+      <p class="card-desc">{description}</p>
+      {
+        stack && stack.length > 0 && (
+          <ul class="card-stack">
+            {stack.map((s) => <li>{s}</li>)}
+          </ul>
+        )
+      }
+      {
+        (liveUrl || codeUrl) && (
+          <footer class="card-links">
+            {liveUrl && <a href={liveUrl} target="_blank" rel="noreferrer">Visit ↗</a>}
+            {codeUrl && <a href={codeUrl} target="_blank" rel="noreferrer">Source ↗</a>}
+          </footer>
+        )
+      }
+    </article>
+  )
+}
 
 <style>
   .card {
@@ -45,7 +82,7 @@ const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
   }
   @media (hover: hover) { .card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-slab); } }
   .card-archived { background: var(--ground); }
-  .card-head { display: flex; justify-content: space-between; color: var(--ink-muted); }
+  .card-head { display: flex; justify-content: space-between; align-items: center; color: var(--ink-muted); }
   h3 { margin: var(--step-2) 0 0; }
   .card-desc { margin: 0; color: var(--ink-muted); }
   .card-stack { display: flex; flex-wrap: wrap; gap: var(--step-2); margin: var(--step-1) 0 0; padding: 0; list-style: none; }
@@ -53,4 +90,29 @@ const meta = [year, status && statusLabel[status]].filter(Boolean).join(" · ");
   .card-links { display: flex; gap: var(--step-6); margin-top: auto; padding-top: var(--step-3); border-top: 1px solid var(--line); }
   .card-links a { font: 600 15px/20px var(--font-sans); text-decoration: none; }
   .card-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Featured: one wide slab across the grid, art on the left, a bigger and bolder story on the right */
+  .card-featured {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 0; padding: 0;
+    border-width: 2px; box-shadow: var(--shadow-slab);
+  }
+  @media (hover: hover) { .card-featured:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-slab-lg); } }
+  .card-featured :global(.art) { border-right: 2px solid var(--slab); }
+  .feature-body { display: flex; flex-direction: column; gap: var(--step-4); padding: var(--step-8) var(--step-8) var(--step-8); }
+  .feature-tags { display: inline-flex; align-items: center; gap: var(--step-3); }
+  .badge {
+    padding: 2px 10px; background: var(--glow); color: var(--on-glow);
+    border: 1px solid var(--slab); border-radius: var(--radius-pill); box-shadow: 2px 2px 0 0 var(--slab);
+    font-weight: 500; text-transform: uppercase;
+  }
+  .feature-title { margin: var(--step-2) 0 0; font-family: var(--font-display); font-size: clamp(48px, 7vw, 72px); line-height: 0.95; font-weight: 800; letter-spacing: -0.04em; }
+  .feature-tagline { margin: calc(var(--step-2) * -1) 0 0; font: italic 600 21px/28px var(--font-sans); color: var(--glow); }
+  .feature-desc { margin: 0; max-width: 44ch; font-size: 19px; line-height: 30px; color: var(--ink-muted); }
+  .feature-links { display: flex; flex-wrap: wrap; gap: var(--step-4); margin-top: auto; padding-top: var(--step-4); }
+
+  @media (max-width: 760px) {
+    .card-featured { grid-template-columns: 1fr; }
+    .card-featured :global(.art) { min-height: 200px; border-right: 0; border-bottom: 2px solid var(--slab); }
+    .feature-body { padding: var(--step-6); }
+  }
 </style>

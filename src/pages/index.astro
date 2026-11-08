@@ -83,7 +83,7 @@ const jsonLd = {
       <ul class="projects">
         {
           projects.map((p, i) => (
-            <li>
+            <li class:list={[p.featured && "featured"]}>
               <ProjectCard number={String(i + 1).padStart(2, "0")} {...p} />
             </li>
           ))
@@ -183,6 +183,7 @@ const jsonLd = {
   @media (hover: hover) { .pill:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-slab); } }
   .pill:active { transform: translate(3px, 3px); box-shadow: none; }
   .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--step-8); margin: 0; padding: 0 6px 6px 0; list-style: none; }
+  .projects .featured { grid-column: 1 / -1; }
   .contact-text { margin: 0; max-width: 52ch; color: var(--ink-muted); }
   .contact-actions { display: flex; flex-wrap: wrap; gap: var(--step-6); margin-top: var(--step-8); }
   @media (max-width: 960px) { .projects { grid-template-columns: 1fr 1fr; } }
